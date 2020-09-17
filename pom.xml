@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>cc.wanforme.munkblog</groupId>
+	<artifactId>MunkBlog</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>MunkBlog</name>
+	<description>A Basic Project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<!-- 指定maven版本，eclispe 中 pom文件第一行报错 -->
+		<!-- <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version> -->
+		<mybatisplus.version>3.0.1</mybatisplus.version>
+		<swagger2.version>2.7.0</swagger2.version>
+		<swagger-ui.version>2.7.0</swagger-ui.version>
+		<druid-starter.version>1.1.10</druid-starter.version>
+		<commons-text.version>1.6</commons-text.version>
+	</properties>
+
+	<dependencies>
+		
+		<!-- 引入Web模块 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		
+		<!-- spring安全 -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency> 
+        
+		<!-- aop模块 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<!-- redis 支持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		
+		<!-- Swagger2依赖 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger-ui.version}</version>
+		</dependency>
+		
+	 	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 日志支持 -->
+		<!-- SB高版本使用 log4j2，去除内置 logging -->
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter</artifactId>
+	        <exclusions>
+	          <exclusion>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-logging</artifactId>
+	          </exclusion>
+	        </exclusions>
+		</dependency>
+         <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+ 		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>
+
+		<!-- 热部署[1] -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- druid连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid-starter.version}</version>
+		</dependency>
+		
+		 <!-- 换用mybatis-plus -->
+		 <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatisplus.version}</version>
+        </dependency>
+		<!-- 引入jdbc -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<!-- 引入mysql连接 -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		
+        <!-- 引入apache常用工具类（字符串） -->
+        <dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-text</artifactId>
+		    <version>${commons-text.version}</version>
+		</dependency>
+		
+		<!--  SpringBoot 2.3 内置jackson
+	    <dependency>
+	      <groupId>com.fasterxml.jackson.core</groupId>
+	      <artifactId>jackson-databind</artifactId>
+	    </dependency>
+	    <dependency>
+	      <groupId>com.fasterxml.jackson.core</groupId>
+	      <artifactId>jackson-core</artifactId>
+	    </dependency>
+	    <dependency>
+	      <groupId>com.fasterxml.jackson.core</groupId>
+	      <artifactId>jackson-annotations</artifactId>
+	    </dependency>
+	    -->
+		
+		
+	</dependencies>
+
+	<build>
+		<!-- 默认源代码和资源文件目录配置 -->
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/java</directory>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/java</directory>
+			</testResource>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+			</testResource>
+		</testResources>
+
+		<!--
+		<outputDirectory>${project.basedir}/target</outputDirectory>
+		<testOutputDirectory>${project.basedir}/target</testOutputDirectory>
+		-->
+		
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork> <!-- 热部署[2] -->
+					<mainClass>cc.wanforme.munkblog.MunkBlogApplication</mainClass>  <!-- 指定主方法,可选，推荐指定，防止多个主方法冲突 -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
