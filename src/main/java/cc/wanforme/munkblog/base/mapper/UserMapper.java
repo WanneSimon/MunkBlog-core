@@ -1,23 +1,16 @@
 package cc.wanforme.munkblog.base.mapper;
 
-
-import org.apache.ibatis.annotations.Mapper;
-
+import cc.wanforme.munkblog.base.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-import cc.wanforme.munkblog.base.po.User;
-
-
 /**
- * 用户dao
+ * <p>
+ * 用户表（不实现评论和留言，但是保留） Mapper 接口
+ * </p>
+ *
  * @author wanne
- * 2019年10月02日
+ * @since 2020-09-17
  */
-@Mapper
-public interface UserMapper extends BaseMapper<User>{
-	
-	/** 获取用户, 通过id*/
-	@Deprecated
-	User getUser(long id);
-	
+public interface UserMapper extends BaseMapper<User> {
+
 }
