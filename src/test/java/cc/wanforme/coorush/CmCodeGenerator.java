@@ -22,9 +22,9 @@ public class CmCodeGenerator {
 	
 	public static void main(String[] args) {
 		String[] tables = {
-				"blog", "blog_quotation", "book", "bookmark", "comic_words", "daily_log",
-				"efile", "game", "image_file", "munk_tag", 
-				"user"
+//				"blog", "blog_quotation", "book", "bookmark", "comic_words", "daily_log",
+//				"efile", "game", "image_file", "munk_tag", 
+//				"user"
 		};
 		
 		AutoGenerator generator = new AutoGenerator();
