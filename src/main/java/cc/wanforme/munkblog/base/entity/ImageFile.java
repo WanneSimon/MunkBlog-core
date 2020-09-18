@@ -31,6 +31,9 @@ public class ImageFile implements Serializable {
     @ApiModelProperty(value = "所属对象的类型, 博文-Blog, 日志-DailyLog, 书架-Books, 游戏-Games")
     private String type;
 
+    @ApiModelProperty(value = "0-失效, 1-生效")
+    private String valid;
+
 
     public Integer getId() {
         return id;
@@ -64,6 +67,14 @@ public class ImageFile implements Serializable {
         this.type = type;
     }
 
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
     @Override
     public String toString() {
         return "ImageFile{" +
@@ -71,6 +82,7 @@ public class ImageFile implements Serializable {
         ", objectId=" + objectId +
         ", fileId=" + fileId +
         ", type=" + type +
+        ", valid=" + valid +
         "}";
     }
 }

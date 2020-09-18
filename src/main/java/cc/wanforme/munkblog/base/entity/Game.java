@@ -38,6 +38,9 @@ public class Game implements Serializable {
     @ApiModelProperty(value = "最后更新时间")
     private LocalDateTime updateTime;
 
+    @ApiModelProperty(value = "0-失效, 1-生效")
+    private String valid;
+
 
     public Integer getId() {
         return id;
@@ -87,6 +90,14 @@ public class Game implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
     @Override
     public String toString() {
         return "Game{" +
@@ -96,6 +107,7 @@ public class Game implements Serializable {
         ", editor=" + editor +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
+        ", valid=" + valid +
         "}";
     }
 }

@@ -35,6 +35,9 @@ public class Efile implements Serializable {
     @ApiModelProperty(value = "所属对象的类型, 博文-Blog, 日志-DailyLog, 书架-Books, 游戏-Games")
     private String type;
 
+    @ApiModelProperty(value = "0-失效, 1-生效")
+    private String valid;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
@@ -82,6 +85,14 @@ public class Efile implements Serializable {
         this.type = type;
     }
 
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -106,6 +117,7 @@ public class Efile implements Serializable {
         ", base=" + base +
         ", fileName=" + fileName +
         ", type=" + type +
+        ", valid=" + valid +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

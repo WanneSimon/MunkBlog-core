@@ -29,6 +29,9 @@ public class ComicWords implements Serializable {
     @ApiModelProperty(value = "语录来源作者")
     private String author;
 
+    @ApiModelProperty(value = "0-失效, 1-生效")
+    private String valid;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
@@ -60,6 +63,14 @@ public class ComicWords implements Serializable {
         this.author = author;
     }
 
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -82,6 +93,7 @@ public class ComicWords implements Serializable {
         "id=" + id +
         ", text=" + text +
         ", author=" + author +
+        ", valid=" + valid +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

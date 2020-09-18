@@ -35,6 +35,9 @@ public class Blog implements Serializable {
     @ApiModelProperty(value = "编辑器版本 (默认quill3+)")
     private String editor;
 
+    @ApiModelProperty(value = "0-失效, 1-生效")
+    private String valid;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
@@ -82,6 +85,14 @@ public class Blog implements Serializable {
         this.editor = editor;
     }
 
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -106,6 +117,7 @@ public class Blog implements Serializable {
         ", content=" + content +
         ", groupType=" + groupType +
         ", editor=" + editor +
+        ", valid=" + valid +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

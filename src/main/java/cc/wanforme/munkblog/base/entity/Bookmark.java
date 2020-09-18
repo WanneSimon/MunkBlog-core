@@ -32,6 +32,9 @@ public class Bookmark implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    @ApiModelProperty(value = "0-失效, 1-生效")
+    private String valid;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
@@ -79,6 +82,14 @@ public class Bookmark implements Serializable {
         this.remark = remark;
     }
 
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -103,6 +114,7 @@ public class Bookmark implements Serializable {
         ", description=" + description +
         ", link=" + link +
         ", remark=" + remark +
+        ", valid=" + valid +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";
