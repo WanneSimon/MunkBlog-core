@@ -3,6 +3,7 @@ package cc.wanforme.coorush;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -10,17 +11,18 @@ import com.baomidou.mybatisplus.generator.config.FileOutConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import com.mysql.jdbc.Driver;
 
 public class CmCodeGenerator {
 	
 	
 	public static void main(String[] args) {
 		String[] tables = {
-				"blog", "blog_quotation", "book", "bookmark", "comic_words", "daily_log",
-				"efile", "game", "image_file", "munk_tag", "user"
+//				"blog", "blog_quotation", "book", "bookmark", "comic_words", "daily_log",
+//				"efile", "game", "image_file", "munk_tag", 
+				"user"
 		};
 		
 		AutoGenerator generator = new AutoGenerator();
@@ -52,19 +54,20 @@ public class CmCodeGenerator {
             }
         };
         // 如果模板引擎是 freemarker
-        //String templatePath = "/templates/mapper.xml.ftl";
+        String templatePath = "/templates/mapper.xml.ftl";
         // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
         // 自定义配置会被优先输出
-//        focList.add(new FileOutConfig(templatePath) {
-//            @Override
-//            public String outputFile(TableInfo tableInfo) {
-//                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-//                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
-//                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-//            }
-//        });
-//        cfg.setFileOutConfigList(focList);
+        focList.add(new FileOutConfig(templatePath) {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                String path = projectPath + "/src/main/resources/mapper/" + packageCfg.getModuleName()
+                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return path;
+            }
+        });
+        cfg.setFileOutConfigList(focList);
 		
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();

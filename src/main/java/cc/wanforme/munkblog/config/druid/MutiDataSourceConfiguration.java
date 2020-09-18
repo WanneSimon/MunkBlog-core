@@ -23,7 +23,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 
-/** 使用多数据源，一定要检查这里和yml文件中的配置
+/** 使用多数据源，一定要检查这里和yml文件中的配置<br>
+ * 注：使用多数据源请放开 @Configuration, 同时关闭另一个类 - DatabaseConfiguration
  * @author wanne
  * 2020年4月22日
  * 
