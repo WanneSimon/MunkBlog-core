@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="Efile对象", description="存放所有的文件信息")
 public class Efile implements Serializable {
@@ -32,14 +32,15 @@ public class Efile implements Serializable {
     @ApiModelProperty(value = "文件名（磁盘上的名字，文件名+'-'+'id'）")
     private String fileName;
 
-    @ApiModelProperty(value = "归类，区分哪里的文件")
-    private String group;
+    @ApiModelProperty(value = "所属对象的类型, 博文-Blog, 日志-DailyLog, 书架-Books, 游戏-Games")
+    private String type;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "最后一次更新时间")
     private LocalDateTime updateTime;
+
 
     public Integer getId() {
         return id;
@@ -48,6 +49,7 @@ public class Efile implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -55,6 +57,7 @@ public class Efile implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getBase() {
         return base;
     }
@@ -62,6 +65,7 @@ public class Efile implements Serializable {
     public void setBase(String base) {
         this.base = base;
     }
+
     public String getFileName() {
         return fileName;
     }
@@ -69,13 +73,15 @@ public class Efile implements Serializable {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-    public String getGroup() {
-        return group;
+
+    public String getType() {
+        return type;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setType(String type) {
+        this.type = type;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -83,6 +89,7 @@ public class Efile implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -98,7 +105,7 @@ public class Efile implements Serializable {
         ", name=" + name +
         ", base=" + base +
         ", fileName=" + fileName +
-        ", group=" + group +
+        ", type=" + type +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

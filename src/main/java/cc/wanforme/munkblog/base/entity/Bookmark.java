@@ -1,10 +1,6 @@
 package cc.wanforme.munkblog.base.entity;
 
 import java.time.LocalDateTime;
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,14 +11,13 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="Bookmark对象", description="书签")
 public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "书签名")
@@ -34,11 +29,15 @@ public class Bookmark implements Serializable {
     @ApiModelProperty(value = "书签连接")
     private String link;
 
+    @ApiModelProperty(value = "备注")
+    private String remark;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "最后更新时间")
     private LocalDateTime updateTime;
+
 
     public Integer getId() {
         return id;
@@ -47,6 +46,7 @@ public class Bookmark implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -54,6 +54,7 @@ public class Bookmark implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
@@ -61,6 +62,7 @@ public class Bookmark implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getLink() {
         return link;
     }
@@ -68,6 +70,15 @@ public class Bookmark implements Serializable {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -75,6 +86,7 @@ public class Bookmark implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -90,6 +102,7 @@ public class Bookmark implements Serializable {
         ", name=" + name +
         ", description=" + description +
         ", link=" + link +
+        ", remark=" + remark +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

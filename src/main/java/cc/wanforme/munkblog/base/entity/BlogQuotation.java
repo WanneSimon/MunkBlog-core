@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="BlogQuotation对象", description="博文引用")
 public class BlogQuotation implements Serializable {
@@ -31,6 +31,7 @@ public class BlogQuotation implements Serializable {
     @ApiModelProperty(value = "引用连接")
     private String link;
 
+
     public Integer getId() {
         return id;
     }
@@ -38,6 +39,7 @@ public class BlogQuotation implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public Integer getBlogId() {
         return blogId;
     }
@@ -45,6 +47,7 @@ public class BlogQuotation implements Serializable {
     public void setBlogId(Integer blogId) {
         this.blogId = blogId;
     }
+
     public String getName() {
         return name;
     }
@@ -52,6 +55,7 @@ public class BlogQuotation implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getLink() {
         return link;
     }

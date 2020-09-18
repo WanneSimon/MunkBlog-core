@@ -16,13 +16,12 @@ CREATE TABLE `blog`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '博文内容',
-  `group_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '归类',
-  `editor` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编辑器版本 (默认quill3+)',
+  `group` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '归类',
   `create_time` datetime(0) DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL COMMENT '最后编辑时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `blog_title`(`title`) USING BTREE COMMENT '标题索引',
-  INDEX `blog_group`(`group_type`, `title`) USING BTREE COMMENT '归类标题',
+  INDEX `blog_group`(`group`, `title`) USING BTREE COMMENT '归类标题',
   INDEX `blog_create_time`(`create_time`) USING BTREE COMMENT '创建时间'
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '博文' ROW_FORMAT = Dynamic;
 
@@ -47,7 +46,6 @@ CREATE TABLE `book`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '书名',
   `description` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '介绍',
-  `editor` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编辑器版本 (默认quill3+)',
   `create_time` datetime(0) DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
@@ -60,11 +58,10 @@ CREATE TABLE `book`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bookmark`;
 CREATE TABLE `bookmark`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL  AUTO_INCREMENT,,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '书签名',
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '简短描述',
   `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '书签连接',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `create_time` datetime(0) DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后更新时间',
   PRIMARY KEY (`id`) USING BTREE,
@@ -94,7 +91,6 @@ DROP TABLE IF EXISTS `daily_log`;
 CREATE TABLE `daily_log`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '日志内容',
-  `editor` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编辑器版本 (默认quill3+)',
   `create_time` datetime(0) DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
   `update_time` datetime(0) DEFAULT NULL COMMENT '最后更新日期',
   PRIMARY KEY (`id`) USING BTREE,
@@ -110,13 +106,13 @@ CREATE TABLE `efile`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '文件名，虚拟名',
   `base` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '所处目录(\'/\'开头绝对路径, 否则就是 相对项目的目录)',
   `file_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '文件名（磁盘上的名字，文件名+\'-\'+\'id\'）',
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '所属对象的类型, 博文-Blog, 日志-DailyLog, 书架-Books, 游戏-Games',
+  `group` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '归类，区分哪里的文件',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后一次更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `efile_name`(`name`) USING BTREE COMMENT '文件名索引',
   INDEX `efile_base`(`base`) USING BTREE COMMENT '文件根路径目录索引',
-  INDEX `efile_group`(`type`) USING BTREE COMMENT '文件所属组别',
+  INDEX `efile_group`(`group`) USING BTREE COMMENT '文件所属组别',
   INDEX `efile_createTime`(`create_time`) USING BTREE COMMENT '创建时间'
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '存放所有的文件信息' ROW_FORMAT = Dynamic;
 
@@ -128,7 +124,6 @@ CREATE TABLE `game`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '游戏名',
   `description` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '描述',
-  `editor` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编辑器版本 (默认quill3+)',
   `create_time` datetime(0) DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后更新时间',
   PRIMARY KEY (`id`) USING BTREE,
@@ -180,3 +175,6 @@ CREATE TABLE `user`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表（不实现评论和留言，但是保留）' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+

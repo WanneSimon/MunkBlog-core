@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="MunkTag对象", description="各种对象的标签")
 public class MunkTag implements Serializable {
@@ -28,6 +28,7 @@ public class MunkTag implements Serializable {
     @ApiModelProperty(value = "所属对象的类型, 博文-Blog, 日志-DailyLog, 书架-Books, 游戏-Games")
     private String type;
 
+
     public Integer getId() {
         return id;
     }
@@ -35,6 +36,7 @@ public class MunkTag implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getTagName() {
         return tagName;
     }
@@ -42,6 +44,7 @@ public class MunkTag implements Serializable {
     public void setTagName(String tagName) {
         this.tagName = tagName;
     }
+
     public Integer getObjectId() {
         return objectId;
     }
@@ -49,6 +52,7 @@ public class MunkTag implements Serializable {
     public void setObjectId(Integer objectId) {
         this.objectId = objectId;
     }
+
     public String getType() {
         return type;
     }

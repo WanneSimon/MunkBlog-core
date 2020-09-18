@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="Blog对象", description="博文")
 public class Blog implements Serializable {
@@ -30,13 +30,17 @@ public class Blog implements Serializable {
     private String content;
 
     @ApiModelProperty(value = "归类")
-    private String group;
+    private String groupType;
+
+    @ApiModelProperty(value = "编辑器版本 (默认quill3+)")
+    private String editor;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "最后编辑时间")
     private LocalDateTime updateTime;
+
 
     public Integer getId() {
         return id;
@@ -45,6 +49,7 @@ public class Blog implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getTitle() {
         return title;
     }
@@ -52,6 +57,7 @@ public class Blog implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getContent() {
         return content;
     }
@@ -59,13 +65,23 @@ public class Blog implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-    public String getGroup() {
-        return group;
+
+    public String getGroupType() {
+        return groupType;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupType(String groupType) {
+        this.groupType = groupType;
     }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -73,6 +89,7 @@ public class Blog implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -87,7 +104,8 @@ public class Blog implements Serializable {
         "id=" + id +
         ", title=" + title +
         ", content=" + content +
-        ", group=" + group +
+        ", groupType=" + groupType +
+        ", editor=" + editor +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

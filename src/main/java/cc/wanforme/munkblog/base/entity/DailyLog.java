@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="DailyLog对象", description="日志")
 public class DailyLog implements Serializable {
@@ -26,11 +26,15 @@ public class DailyLog implements Serializable {
     @ApiModelProperty(value = "日志内容")
     private String content;
 
+    @ApiModelProperty(value = "编辑器版本 (默认quill3+)")
+    private String editor;
+
     @ApiModelProperty(value = "创建日期")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "最后更新日期")
     private LocalDateTime updateTime;
+
 
     public Integer getId() {
         return id;
@@ -39,6 +43,7 @@ public class DailyLog implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getContent() {
         return content;
     }
@@ -46,6 +51,15 @@ public class DailyLog implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -53,6 +67,7 @@ public class DailyLog implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -66,6 +81,7 @@ public class DailyLog implements Serializable {
         return "DailyLog{" +
         "id=" + id +
         ", content=" + content +
+        ", editor=" + editor +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

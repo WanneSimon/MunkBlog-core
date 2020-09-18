@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @Service
 public class ComicWordsServiceImpl extends ServiceImpl<ComicWordsMapper, ComicWords> implements IComicWordsService {

@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="User对象", description="用户表（不实现评论和留言，但是保留）")
 public class User implements Serializable {
@@ -37,6 +37,7 @@ public class User implements Serializable {
     @ApiModelProperty(value = "邮箱")
     private String email;
 
+
     public Integer getId() {
         return id;
     }
@@ -44,6 +45,7 @@ public class User implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -51,6 +53,7 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getUsername() {
         return username;
     }
@@ -58,6 +61,7 @@ public class User implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getPassword() {
         return password;
     }
@@ -65,6 +69,7 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getType() {
         return type;
     }
@@ -72,6 +77,7 @@ public class User implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
     public String getEmail() {
         return email;
     }

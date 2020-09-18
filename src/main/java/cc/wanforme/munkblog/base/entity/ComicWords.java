@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author wanne
- * @since 2020-09-17
+ * @since 2020-09-18
  */
 @ApiModel(value="ComicWords对象", description="语录")
 public class ComicWords implements Serializable {
@@ -35,6 +35,7 @@ public class ComicWords implements Serializable {
     @ApiModelProperty(value = "最后更新时间")
     private LocalDateTime updateTime;
 
+
     public Integer getId() {
         return id;
     }
@@ -42,6 +43,7 @@ public class ComicWords implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getText() {
         return text;
     }
@@ -49,6 +51,7 @@ public class ComicWords implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
+
     public String getAuthor() {
         return author;
     }
@@ -56,6 +59,7 @@ public class ComicWords implements Serializable {
     public void setAuthor(String author) {
         this.author = author;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -63,6 +67,7 @@ public class ComicWords implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
