@@ -25,6 +25,7 @@ public class CmCodeGenerator {
 //				"blog", "blog_quotation", "book", "bookmark", "comic_words", "daily_log",
 //				"efile", "game", "image_file", "munk_tag", 
 //				"user"
+				"bookmark_folder"
 		};
 		
 		AutoGenerator generator = new AutoGenerator();
