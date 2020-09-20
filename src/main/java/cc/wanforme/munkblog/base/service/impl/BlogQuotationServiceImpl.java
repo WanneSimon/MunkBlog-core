@@ -4,6 +4,9 @@ import cc.wanforme.munkblog.base.entity.BlogQuotation;
 import cc.wanforme.munkblog.base.mapper.BlogQuotationMapper;
 import cc.wanforme.munkblog.base.service.IBlogQuotationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BlogQuotationServiceImpl extends ServiceImpl<BlogQuotationMapper, BlogQuotation> implements IBlogQuotationService {
+
+	@Override
+	public List<BlogQuotation> selectByBlog(int blogId) {
+		return this.baseMapper.selectByBlog(blogId);
+	}
 
 }

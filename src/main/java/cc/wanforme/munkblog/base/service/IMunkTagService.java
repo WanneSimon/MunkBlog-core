@@ -1,6 +1,9 @@
 package cc.wanforme.munkblog.base.service;
 
 import cc.wanforme.munkblog.base.entity.MunkTag;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,5 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-09-18
  */
 public interface IMunkTagService extends IService<MunkTag> {
-
+	
+	List<MunkTag> selectTags(String type, int objectId, String valid);
+	
 }

@@ -1,6 +1,10 @@
 package cc.wanforme.munkblog.base.service;
 
 import cc.wanforme.munkblog.base.entity.Book;
+import cc.wanforme.munkblog.vo.book.BookSearchVo;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBookService extends IService<Book> {
 
+	List<Book> selectBooks(BookSearchVo searchVo);
+	
 }

@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.MunkTagMapper">
 
+	<select id="selectTags" resultType="cc.wanforme.munkblog.base.entity.MunkTag">
+		select * from munk_tag where type=#{type} and objectId=#{objectId} and valid=#{valid}
+	</select>
+
 </mapper>

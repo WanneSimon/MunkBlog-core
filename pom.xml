@@ -126,6 +126,13 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatisplus.version}</version>
         </dependency>
+        <!-- mybatisplugs 分页插件 -->
+        <dependency>
+		   <groupId>com.github.pagehelper</groupId>
+		   <artifactId>pagehelper</artifactId>
+		   <version>5.0.0</version>
+		</dependency>
+        
 		<!-- 引入jdbc -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>

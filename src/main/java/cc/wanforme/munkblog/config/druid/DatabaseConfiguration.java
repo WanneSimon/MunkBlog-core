@@ -14,6 +14,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 
 /**数据库库配置用的是这个，单数据源<br>
  * @author wanne
@@ -50,5 +51,13 @@ public class DatabaseConfiguration {
 		sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(mapper_locations));
 		return sessionFactory.getObject();
 	}
+	
+    /**
+     * 分页插件
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
 	
 }

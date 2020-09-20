@@ -4,6 +4,9 @@ import cc.wanforme.munkblog.base.entity.MunkTag;
 import cc.wanforme.munkblog.base.mapper.MunkTagMapper;
 import cc.wanforme.munkblog.base.service.IMunkTagService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MunkTagServiceImpl extends ServiceImpl<MunkTagMapper, MunkTag> implements IMunkTagService {
+
+	@Override
+	public List<MunkTag> selectTags(String type, int objectId, String valid) {
+		return this.baseMapper.selectTags(type, objectId, valid);
+	}
 
 }
