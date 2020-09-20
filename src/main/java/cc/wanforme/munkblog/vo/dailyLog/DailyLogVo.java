@@ -1,32 +1,39 @@
-package cc.wanforme.munkblog.vo;
+package cc.wanforme.munkblog.vo.dailyLog;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import cc.wanforme.munkblog.base.entity.ImageFile;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 语录
+ * 日志
  * </p>
  *
  * @author wanne
  * @since 2020-09-18
  */
-public class ComicWordsVo implements Serializable {
+public class DailyLogVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    /**语录内容*/
-    private String text;
-    /**语录来源作者*/
-    private String author;
+    /**日志内容*/
+    private String content;
+    /**编辑器版本 (默认quill3+)*/
+    private String editor;
     /**0-失效, 1-生效*/
     private String valid;
-    /**创建时间*/
+    /**创建日期*/
     private LocalDateTime createTime;
-    /**最后更新时间*/
+    /**最后更新日期*/
     private LocalDateTime updateTime;
 
+    /**书的图片*/
+    private List<ImageFile> images;
+    
     public Integer getId() {
         return id;
     }
@@ -35,20 +42,20 @@ public class ComicWordsVo implements Serializable {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getContent() {
+        return content;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getEditor() {
+        return editor;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setEditor(String editor) {
+        this.editor = editor;
     }
 
     public String getValid() {
@@ -74,16 +81,21 @@ public class ComicWordsVo implements Serializable {
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
+    
+    public List<ImageFile> getImages() {
+		return images;
+	}
 
     @Override
     public String toString() {
-        return "ComicWords{" +
+        return "DailyLogVo{" +
         "id=" + id +
-        ", text=" + text +
-        ", author=" + author +
+        ", content=" + content +
+        ", editor=" + editor +
         ", valid=" + valid +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
+        ", images=" + images +
         "}";
     }
 }

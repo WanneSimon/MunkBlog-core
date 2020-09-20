@@ -1,4 +1,4 @@
-package cc.wanforme.munkblog.vo;
+package cc.wanforme.munkblog.vo.book;
 
 import java.time.LocalDateTime;
 
