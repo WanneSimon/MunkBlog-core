@@ -10,6 +10,9 @@ spring:
     active: dev
   application:
     name: CooRush
+  # jackson 序列化对象时，去除 null 属性
+  jackson:
+    default-property-inclusion: non_null
 #  cloud:
 #    config:
 #      enabled: false
