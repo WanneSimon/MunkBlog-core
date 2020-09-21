@@ -48,6 +48,7 @@ public class ResMessage {
 	}
 	
 	
+	// 构造者模式改进
 	public static ResMessage newMessage(ResCode code, String messasge, Object data) {
 		return new ResMessage(code.getCode(), messasge, data);
 	}
