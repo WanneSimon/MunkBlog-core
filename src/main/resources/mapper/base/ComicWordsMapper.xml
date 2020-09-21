@@ -2,14 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.ComicWordsMapper">
 	
+	<sql id="ID_DESC">
+		order by id desc
+	</sql>
+	
 	<select id="selectComicWords" parameterType="cc.wanforme.munkblog.vo.comicWords.ComicWordsSearchVo"
 	  resultType="cc.wanforme.munkblog.base.entity.ComicWords">
 	  select * from comic_words
 	  <where>
 	  	valid=#{valid}
-	  	<if test="author!=null"> and author like concat('%', #{author},'%') </if>
+	  	<if test="author != null"> and author like concat('%', #{author},'%') </if>
 	  	<if test="text!=null and text!=''"> and text like concat('%', #{text},'%') </if>
 	  </where>
+	  <include refid="ID_DESC" />
 	</select>
 	
 </mapper>

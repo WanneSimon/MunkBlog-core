@@ -17,7 +17,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface MunkTagMapper extends BaseMapper<MunkTag> {
 
-	List<MunkTag> selectTags(@Param("type") String type,
-			@Param("objectId")int objectId, @Param("valid")String valid);
+	List<MunkTag> selectTags(@Param("valid")String valid, @Param("type") String type,
+			@Param("objectId")int objectId );
 
 }

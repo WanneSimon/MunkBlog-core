@@ -2,8 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.MunkTagMapper">
 
+	<sql id="ID_DESC">
+		order by id desc
+	</sql>
+
 	<select id="selectTags" resultType="cc.wanforme.munkblog.base.entity.MunkTag">
-		select * from munk_tag where type=#{type} and objectId=#{objectId} and valid=#{valid}
+		select * from munk_tag where valid=#{valid} and type=#{type} and object_id=#{objectId} 
+		<include refid="ID_DESC" />
 	</select>
 
 </mapper>

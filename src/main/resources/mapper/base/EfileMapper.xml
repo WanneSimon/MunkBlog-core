@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.EfileMapper">
-
+	
+	<sql id="ID_DESC">
+		order by id desc
+	</sql>
+	
+	<select id="selectEfiles" parameterType="cc.wanforme.munkblog.vo.efile.EfileSearchVo"
+		resultType="cc.wanforme.munkblog.base.entity.Efile">
+		select * from efile 
+		<where>
+			<if test="valid != null"> valid=#{valid} </if>
+			<if test="type != null"> and type=#{type} </if>
+			<if test="name != null"> and name=#{name} </if>
+		</where>
+		<include refid="ID_DESC" />
+	</select>
+	
 </mapper>

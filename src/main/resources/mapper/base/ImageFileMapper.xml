@@ -2,4 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.ImageFileMapper">
 
+	<sql id="ID_DESC">
+		order by id desc
+	</sql>
+
+	<select id="selectBooks" 
+		resultType="cc.wanforme.munkblog.base.entity.ImageFile">
+		select * from image_file 
+		  where valid = #{valid} and object_id=#{objectId}
+		  <include refid="ID_DESC" />
+	</select>
+	
+	<select id="selectByTypeWithObjectId" 
+		resultType="cc.wanforme.munkblog.base.entity.ImageFile">
+		select * from image_file 
+		  where valid = #{valid} 
+		  	and type=#{type}
+		  	and object_id=#{objectId}
+		  	<include refid="ID_DESC" />
+	</select>
+	
 </mapper>

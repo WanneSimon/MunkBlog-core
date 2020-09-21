@@ -7,6 +7,7 @@ import cc.wanforme.munkblog.vo.blog.BlogResultRecorder;
 import cc.wanforme.munkblog.vo.blog.BlogSearchVo;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 

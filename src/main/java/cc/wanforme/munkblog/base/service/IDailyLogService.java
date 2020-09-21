@@ -1,6 +1,10 @@
 package cc.wanforme.munkblog.base.service;
 
 import cc.wanforme.munkblog.base.entity.DailyLog;
+import cc.wanforme.munkblog.vo.dailyLog.DailyLogSearchVo;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IDailyLogService extends IService<DailyLog> {
 
+	List<DailyLog> selectDailyLogs(DailyLogSearchVo searchVo);
+	
 }

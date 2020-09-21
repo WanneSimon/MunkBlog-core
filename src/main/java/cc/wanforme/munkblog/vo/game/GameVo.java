@@ -1,4 +1,4 @@
-package cc.wanforme.munkblog.vo;
+package cc.wanforme.munkblog.vo.game;
 
 import cc.wanforme.munkblog.base.entity.ImageFile;
 

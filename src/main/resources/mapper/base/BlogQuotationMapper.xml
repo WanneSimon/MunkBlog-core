@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.BlogQuotationMapper">
-
+	
+	<sql id="ID_ASC">
+		order by id asc
+	</sql>
+	
 	<select id="selectByBlog" parameterType="int" resultType="cc.wanforme.munkblog.base.entity.BlogQuotation">
 	 	select * from blog_quotation where blog_id = #{blogId}
+	 	<include refid="ID_ASC" />
 	</select>
 
 </mapper>

@@ -137,7 +137,7 @@ CREATE TABLE `efile`  (
   INDEX `efile_name`(`name`) USING BTREE COMMENT '文件名索引',
   INDEX `efile_createTime`(`create_time`) USING BTREE COMMENT '创建时间',
   INDEX `efile_valid_base`(`valid`, `base`) USING BTREE COMMENT '文件根路径目录索引',
-  INDEX `efile_valid_group`(`valid`, `type`) USING BTREE COMMENT '文件所属组别'
+  INDEX `efile_valid_type`(`valid`, `type`) USING BTREE COMMENT '文件所属组别'
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '存放所有的文件信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------

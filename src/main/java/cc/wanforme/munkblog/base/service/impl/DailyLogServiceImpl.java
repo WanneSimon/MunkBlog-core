@@ -3,7 +3,12 @@ package cc.wanforme.munkblog.base.service.impl;
 import cc.wanforme.munkblog.base.entity.DailyLog;
 import cc.wanforme.munkblog.base.mapper.DailyLogMapper;
 import cc.wanforme.munkblog.base.service.IDailyLogService;
+import cc.wanforme.munkblog.vo.dailyLog.DailyLogSearchVo;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +21,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DailyLogServiceImpl extends ServiceImpl<DailyLogMapper, DailyLog> implements IDailyLogService {
+
+	@Override
+	public List<DailyLog> selectDailyLogs(DailyLogSearchVo searchVo) {
+		return this.baseMapper.selectDailyLog(searchVo);
+	}
 
 }

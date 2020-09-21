@@ -1,6 +1,11 @@
 package cc.wanforme.munkblog.base.mapper;
 
 import cc.wanforme.munkblog.base.entity.ImageFile;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,5 +17,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-09-18
  */
 public interface ImageFileMapper extends BaseMapper<ImageFile> {
-
+	
+	List<ImageFile> selectByObjectId(@Param("valid") String valid, @Param("objectId") int objectId);
+	
+	List<ImageFile> selectByTypeWithObjectId(@Param("valid")String valid, @Param("objectId") int objectId,
+			@Param("type") String type);
+	
+	
 }

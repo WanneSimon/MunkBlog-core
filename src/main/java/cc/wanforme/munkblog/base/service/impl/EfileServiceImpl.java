@@ -3,7 +3,12 @@ package cc.wanforme.munkblog.base.service.impl;
 import cc.wanforme.munkblog.base.entity.Efile;
 import cc.wanforme.munkblog.base.mapper.EfileMapper;
 import cc.wanforme.munkblog.base.service.IEfileService;
+import cc.wanforme.munkblog.vo.efile.EfileSearchVo;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +21,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EfileServiceImpl extends ServiceImpl<EfileMapper, Efile> implements IEfileService {
+
+	@Override
+	public List<Efile> selectEfile(EfileSearchVo searchVo) {
+		return this.baseMapper.selectEfiles(searchVo);
+	}
 
 }

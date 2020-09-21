@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.GameMapper">
 
+	<sql id="ID_DESC">
+		order by id desc
+	</sql>
+
+	<select id="selectGames" parameterType="cc.wanforme.munkblog.vo.game.GameSearchVo"
+		resultType="cc.wanforme.munkblog.base.entity.Game">
+		select * from game 
+		<where>
+			valid = #{valid}
+			<if test="name != null and name != '' ">
+				and name like concat('%', #{name}, '%')
+			</if>
+		</where>
+		<include refid="ID_DESC" />
+	</select>
+
 </mapper>

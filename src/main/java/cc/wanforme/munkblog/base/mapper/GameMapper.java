@@ -1,6 +1,10 @@
 package cc.wanforme.munkblog.base.mapper;
 
 import cc.wanforme.munkblog.base.entity.Game;
+import cc.wanforme.munkblog.vo.game.GameSearchVo;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,5 +16,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-09-18
  */
 public interface GameMapper extends BaseMapper<Game> {
+
+	List<Game> selectGames(GameSearchVo searchVo);
 
 }

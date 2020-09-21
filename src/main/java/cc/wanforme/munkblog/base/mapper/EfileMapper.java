@@ -1,6 +1,10 @@
 package cc.wanforme.munkblog.base.mapper;
 
 import cc.wanforme.munkblog.base.entity.Efile;
+import cc.wanforme.munkblog.vo.efile.EfileSearchVo;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,5 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-09-18
  */
 public interface EfileMapper extends BaseMapper<Efile> {
-
+	List<Efile> selectEfiles(EfileSearchVo searchVo);
 }

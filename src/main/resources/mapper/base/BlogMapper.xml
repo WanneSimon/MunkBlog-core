@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.BlogMapper">
 
+	<sql id="ID_DESC">
+		order by id desc
+	</sql>
+
 	<select id="qeuryTotoal" parameterType="cc.wanforme.munkblog.vo.blog.BlogSearchVo"
 	 resultType="int">
 	 	select count(0) from blog 
@@ -11,12 +15,14 @@
 	 	</where> 
 	</select>
 
-	<select id="queryBlogs" resultType="cc.wanforme.munkblog.vo.blog.BlogResultRecorder">
-	 	select id,title,createTime,updateTime from blog 
+	<select id="queryBlogs" parameterType="cc.wanforme.munkblog.vo.blog.BlogSearchVo"
+		resultType="cc.wanforme.munkblog.vo.blog.BlogResultRecorder">
+	 	select id,title,create_time,update_time from blog 
 	 	<where>
 	 		valid='1' 
-	 		<if test="searchVo.keyText!=null and searchVo.keyText!=''"> and title like #{searchVo.keyText}</if>
+	 		<if test="keyText!=null and keyText!=''"> and title like #{keyText}</if>
 	 	</where> 
+	 	<include refid="ID_DESC" />
 	</select>
 
 </mapper>

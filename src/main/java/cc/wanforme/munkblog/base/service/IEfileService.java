@@ -1,6 +1,10 @@
 package cc.wanforme.munkblog.base.service;
 
 import cc.wanforme.munkblog.base.entity.Efile;
+import cc.wanforme.munkblog.vo.efile.EfileSearchVo;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IEfileService extends IService<Efile> {
 
+	List<Efile> selectEfile(EfileSearchVo searchVo);
+	
 }

@@ -22,7 +22,7 @@ public class MunkTagServiceImpl extends ServiceImpl<MunkTagMapper, MunkTag> impl
 
 	@Override
 	public List<MunkTag> selectTags(String type, int objectId, String valid) {
-		return this.baseMapper.selectTags(type, objectId, valid);
+		return this.baseMapper.selectTags(valid, type, objectId);
 	}
 
 }
