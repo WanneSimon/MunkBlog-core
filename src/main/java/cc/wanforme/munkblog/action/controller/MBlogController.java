@@ -34,4 +34,5 @@ public class MBlogController {
 		return blogMunkService.queryBlog(blogId);
 	}
 	
+	
 }
