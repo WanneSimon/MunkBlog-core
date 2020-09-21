@@ -6,6 +6,8 @@ import cc.wanforme.munkblog.base.service.IDailyLogService;
 import cc.wanforme.munkblog.vo.dailyLog.DailyLogSearchVo;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -23,8 +25,10 @@ import org.springframework.stereotype.Service;
 public class DailyLogServiceImpl extends ServiceImpl<DailyLogMapper, DailyLog> implements IDailyLogService {
 
 	@Override
-	public List<DailyLog> selectDailyLogs(DailyLogSearchVo searchVo) {
-		return this.baseMapper.selectDailyLog(searchVo);
+	public PageInfo<DailyLog> selectDailyLogs(DailyLogSearchVo searchVo) {
+		PageHelper.startPage(searchVo.getPage(), searchVo.getSize());
+		List<DailyLog> data = this.baseMapper.selectDailyLog(searchVo);
+		return new PageInfo<DailyLog>(data);
 	}
 
 }

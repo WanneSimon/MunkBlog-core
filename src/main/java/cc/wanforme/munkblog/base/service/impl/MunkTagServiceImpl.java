@@ -1,5 +1,7 @@
 package cc.wanforme.munkblog.base.service.impl;
 
+import cc.wanforme.munkblog.base.constant.MunkObjectEnum;
+import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.MunkTag;
 import cc.wanforme.munkblog.base.mapper.MunkTagMapper;
 import cc.wanforme.munkblog.base.service.IMunkTagService;
@@ -21,8 +23,8 @@ import org.springframework.stereotype.Service;
 public class MunkTagServiceImpl extends ServiceImpl<MunkTagMapper, MunkTag> implements IMunkTagService {
 
 	@Override
-	public List<MunkTag> selectTags(String type, int objectId, String valid) {
-		return this.baseMapper.selectTags(valid, type, objectId);
+	public List<MunkTag> selectTags(MunkObjectEnum type, int objectId, ValidEnum valid) {
+		return this.baseMapper.selectTags(valid.getCode(), type.getCode(), objectId);
 	}
 
 }

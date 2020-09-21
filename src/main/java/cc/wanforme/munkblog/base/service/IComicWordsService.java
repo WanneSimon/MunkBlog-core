@@ -16,6 +16,6 @@ import com.github.pagehelper.PageInfo;
  */
 public interface IComicWordsService extends IService<ComicWords> {
 
-	PageInfo<ComicWords> select(ComicWordsSearchVo searchVo);
+	PageInfo<ComicWords> selectCommicWords(ComicWordsSearchVo searchVo);
 	
 }

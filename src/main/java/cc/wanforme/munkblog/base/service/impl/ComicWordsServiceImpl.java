@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 public class ComicWordsServiceImpl extends ServiceImpl<ComicWordsMapper, ComicWords> implements IComicWordsService {
 
 	@Override
-	public PageInfo<ComicWords> select(ComicWordsSearchVo searchVo) {
+	public PageInfo<ComicWords> selectCommicWords(ComicWordsSearchVo searchVo) {
 		PageHelper.startPage(searchVo.getPage(), searchVo.getSize());
 		List<ComicWords> data = this.baseMapper.selectComicWords(searchVo);
 		return new PageInfo<ComicWords>(data);
