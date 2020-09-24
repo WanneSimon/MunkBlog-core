@@ -11,7 +11,6 @@ import com.github.pagehelper.PageInfo;
 
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.ComicWords;
-import cc.wanforme.munkblog.base.mapper.ComicWordsMapper;
 import cc.wanforme.munkblog.base.service.IComicWordsService;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.comicWords.ComicWordsSearchVo;
@@ -26,8 +25,6 @@ public class MComicWordsService {
 
 	@Autowired
 	private IComicWordsService comicWordsService;
-	@Autowired
-	private ComicWordsMapper mapper;
 	
 	/** 搜索*/
 	public ResMessage searchCommicWords(ComicWordsSearchVo searchVo) {
@@ -51,8 +48,7 @@ public class MComicWordsService {
 		po.setUpdateTime(now);
 		
 //		comicWordsService.mysave(po);
-		mapper.insert(po);
-//		comicWordsService.save(po);
+		comicWordsService.save(po);
 		
 		return ResMessage.newSuccessMessage(po);
 	}

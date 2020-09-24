@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author wanne
  * @since 2020-09-18
  */
-@TableName("comic_words")
+//@TableName("comic_words")
 @ApiModel(value="ComicWords对象", description="语录")
 public class ComicWords implements Serializable {
 
