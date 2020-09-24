@@ -31,4 +31,9 @@ public class ComicWordsServiceImpl extends ServiceImpl<ComicWordsMapper, ComicWo
 		return new PageInfo<ComicWords>(data);
 	}
 
+	@Override
+	public void mysave(ComicWords comicWords) {
+		this.baseMapper.insert(comicWords);
+	}
+
 }

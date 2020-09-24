@@ -18,4 +18,6 @@ public interface IComicWordsService extends IService<ComicWords> {
 
 	PageInfo<ComicWords> selectCommicWords(ComicWordsSearchVo searchVo);
 	
+	void mysave(ComicWords comicWords);
+	
 }

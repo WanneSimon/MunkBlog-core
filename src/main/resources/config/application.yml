@@ -1,7 +1,7 @@
 server:
   port: 8041
   servlet:
-    context-path: /coco/mb
+    context-path: /munkblog
 #   application-display-name: CooRush  
   shutdown: graceful # 优雅关机(勿强制杀死进程)
 

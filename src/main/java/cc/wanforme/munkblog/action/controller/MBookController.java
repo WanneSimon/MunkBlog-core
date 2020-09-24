@@ -3,6 +3,7 @@ package cc.wanforme.munkblog.action.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +17,7 @@ import cc.wanforme.munkblog.vo.book.BookSearchVo;
  * 2020年9月21日
  */
 @Controller
-@RequestMapping("/book")
+@RequestMapping("/api/book")
 public class MBookController {
 
 	@Autowired
@@ -25,7 +26,7 @@ public class MBookController {
 	@RequestMapping
 	@PostMapping("/search")
 	@ResponseBody
-	public ResMessage searchBook(@RequestParam BookSearchVo searchVo) {
+	public ResMessage searchBook(@RequestBody BookSearchVo searchVo) {
 		return bookService.searchBook(searchVo);
 	}
 	
