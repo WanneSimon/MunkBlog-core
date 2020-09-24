@@ -48,11 +48,15 @@ public class ResMessage {
 	}
 	
 	
+	// 构造者模式改进
 	public static ResMessage newMessage(ResCode code, String messasge, Object data) {
 		return new ResMessage(code.getCode(), messasge, data);
 	}
 	public static ResMessage newSuccessMessage(Object data) {
 		return new ResMessage(ResCode.SUCCESS.getCode(), ResCode.SUCCESS.getDescription(), data);
+	}
+	public static ResMessage newFailMessage( String messasge) {
+		return new ResMessage(ResCode.FAIL.getCode(), messasge, null);
 	}
 	public static ResMessage newFailMessage( String messasge, Object data) {
 		return new ResMessage(ResCode.FAIL.getCode(), messasge, data);

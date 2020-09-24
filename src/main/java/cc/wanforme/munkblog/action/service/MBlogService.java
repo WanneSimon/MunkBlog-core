@@ -1,14 +1,18 @@
 package cc.wanforme.munkblog.action.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import com.github.pagehelper.PageInfo;
 
-import cc.wanforme.munkblog.base.constant.MunkObjectEnum;
+import cc.wanforme.munkblog.base.constant.EditorEnum;
+import cc.wanforme.munkblog.base.constant.ObjectTypeEnum;
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.Blog;
 import cc.wanforme.munkblog.base.entity.BlogQuotation;
@@ -64,7 +68,7 @@ public class MBlogService {
 		}
 		
 		// 标签
-		List<MunkTag> tags = tagService.selectTags(MunkObjectEnum.BLOG, blogId, ValidEnum.VALID);
+		List<MunkTag> tags = tagService.selectTags(ObjectTypeEnum.BLOG, blogId, ValidEnum.VALID);
 		
 		// 引用
 		List<BlogQuotation> quotations = blogQuotationService.selectByBlog(blogId);
@@ -78,7 +82,52 @@ public class MBlogService {
 	}
 	
 	
-	// 博文搜索
+	@Transactional(rollbackFor = Exception.class)
+	public ResMessage saveBlog(BlogVo blogVo) {
+		Assert.notNull(blogVo, "没有数据");
+		Assert.notNull(blogVo.getTitle(), "没有标题");
+		Assert.notNull(blogVo.getContent(), "没有内容");
+		Assert.notNull(blogVo.getContent(), "没有归类");
+		
+		LocalDateTime now = LocalDateTime.now();
+		
+		Blog blog = new Blog();
+		BeanUtils.copyProperties(blogVo, blog);
+		if(blog.getEditor() == null) {
+			blog.setEditor(EditorEnum.DEFAULT.getCode());
+		}
+		blog.setId(null);
+		blog.setValid(ValidEnum.VALID.getCode());
+		blog.setCreateTime(now);
+		blog.setUpdateTime(now);
+		
+		this.blogService.save(blog);
+		
+		// 标签
+		if(blogVo.getTags()!=null) {
+			for (MunkTag tag : blogVo.getTags()) {
+				Assert.notNull(tag.getTagName(), "标签名为空");
+				tag.setId(null);
+				tag.setObjectId(blog.getId());
+//				Assert.notNull(tag.getType(), "所属对象类型不能为空");
+				tag.setType(ObjectTypeEnum.BLOG.getCode());
+				tag.setValid(ValidEnum.VALID.getCode());
+				this.tagService.save(tag);
+			}
+		}
+		
+		// 引用
+		if(blogVo.getQuotations() != null) {
+			for (BlogQuotation quotation : blogVo.getQuotations()) {
+				Assert.notNull(quotation.getName(), "引用名为空");
+				Assert.notNull(quotation.getLink(), "\""+quotation.getName()+"\" 的链接为空");
+				quotation.setBlogId(blog.getId());
+				this.blogQuotationService.save(quotation);
+			}
+		}
+		
+		return ResMessage.newSuccessMessage("保存成功");
+	}
 	
 	
 }

@@ -1,6 +1,6 @@
 package cc.wanforme.munkblog.base.service;
 
-import cc.wanforme.munkblog.base.constant.MunkObjectEnum;
+import cc.wanforme.munkblog.base.constant.ObjectTypeEnum;
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.MunkTag;
 
@@ -18,6 +18,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IMunkTagService extends IService<MunkTag> {
 	
-	List<MunkTag> selectTags(MunkObjectEnum type, int objectId, ValidEnum valid);
+	List<MunkTag> selectTags(ObjectTypeEnum type, int objectId, ValidEnum valid);
 	
 }

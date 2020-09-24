@@ -4,7 +4,7 @@ package cc.wanforme.munkblog.base.constant;
  * @author wanne
  * 2020年9月21日
  */
-public enum MunkObjectEnum {
+public enum ObjectTypeEnum {
 	
 	BLOG("Blog", "博文"),
 	DAIL_LOG("DailyLog", "日志、动态"),
@@ -17,7 +17,7 @@ public enum MunkObjectEnum {
 	
 	private String description;
 	
-	private MunkObjectEnum(String code, String description) {
+	private ObjectTypeEnum(String code, String description) {
 		this.code = code;
 		this.description = description;
 	}
