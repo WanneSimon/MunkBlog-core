@@ -79,7 +79,7 @@ spring:
 mybatis-plus:
   # 只能填一个，因为和 DatabaseConfiguration 中的 SqlSessionFactory 有关
   mapper-locations: classpath:/mapper/**/*Mapper.xml
-  type-aliases-package: cc.wanforme.coorush.base.po
+  type-aliases-package: cc.wanforme.munkblog.base.entity
   configuration:
     map-underscore-to-camel-case: true # 下划线转驼峰命名
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # sql日志输出

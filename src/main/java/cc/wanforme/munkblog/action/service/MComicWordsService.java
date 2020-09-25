@@ -47,6 +47,12 @@ public class MComicWordsService {
 		po.setCreateTime(now);
 		po.setUpdateTime(now);
 		
+		ComicWordsSearchVo searchVo = new ComicWordsSearchVo();
+		searchVo.setPage(1);
+		searchVo.setSize(6);
+		searchVo.setValid("1");
+		comicWordsService.selectCommicWords(searchVo);
+		
 //		comicWordsService.mysave(po);
 		comicWordsService.save(po);
 		
