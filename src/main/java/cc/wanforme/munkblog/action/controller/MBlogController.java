@@ -46,5 +46,12 @@ public class MBlogController {
 	public ResMessage updateBlog(@RequestBody BlogVo blogVo) {
 		return blogMunkService.updateBlog(blogVo);
 	}
+
+	@PostMapping("/delete")
+	@ResponseBody
+	public ResMessage deleteBlog(@RequestBody int blogId) {
+		return blogMunkService.deleteBlog(blogId);
+	}
+	
 	
 }

@@ -1,8 +1,6 @@
 package cc.wanforme.munkblog.action.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -14,7 +12,6 @@ import org.springframework.util.Assert;
 import com.github.pagehelper.PageInfo;
 
 import cc.wanforme.munkblog.base.constant.EditorEnum;
-import cc.wanforme.munkblog.base.constant.FileNameEnum;
 import cc.wanforme.munkblog.base.constant.ObjectTypeEnum;
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.Blog;
@@ -22,8 +19,6 @@ import cc.wanforme.munkblog.base.entity.BlogQuotation;
 import cc.wanforme.munkblog.base.entity.MunkTag;
 import cc.wanforme.munkblog.base.service.IBlogQuotationService;
 import cc.wanforme.munkblog.base.service.IBlogService;
-import cc.wanforme.munkblog.base.service.IEfileService;
-import cc.wanforme.munkblog.base.service.IImageFileService;
 import cc.wanforme.munkblog.base.service.IMunkTagService;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.blog.BlogResultRecorder;
@@ -163,12 +158,28 @@ public class MBlogService {
 		blogVo.setContent(null);
 		blogVo.setUpdateTime(null);
 		
+		// 博文更新
+		Blog blog = new Blog();
+		BeanUtils.copyProperties(blogVo, blog);
+		blogService.updateById(blog);
+		
 		// 允许移除所有标签，列表置为 空列表即可
 		mTagService.updateTags(blogVo.getId(), blogVo.getTags());
 		
 		// 允许移除所有引用，列表置为 空列表即可
 		mQuotationService.updateQuotations(blogVo.getId(), blogVo.getQuotations());
 		
+		return ResMessage.newSuccessMessage(null);
+	}
+
+
+	
+	/** 删除*/
+	@Transactional(rollbackFor = Exception.class)
+	public ResMessage deleteBlog(int blogId) {
+		Blog blog = blogService.getById(blogId);
+		blog.setValid(ValidEnum.INVALID.getCode());
+		blogService.updateById(blog);
 		return ResMessage.newSuccessMessage(null);
 	}
 
