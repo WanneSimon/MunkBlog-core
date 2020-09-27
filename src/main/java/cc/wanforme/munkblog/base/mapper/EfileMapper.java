@@ -2,6 +2,7 @@ package cc.wanforme.munkblog.base.mapper;
 
 import cc.wanforme.munkblog.base.entity.Efile;
 import cc.wanforme.munkblog.vo.efile.EfileSearchVo;
+import io.lettuce.core.dynamic.annotation.Param;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface EfileMapper extends BaseMapper<Efile> {
 	List<Efile> selectEfiles(EfileSearchVo searchVo);
+
+	Efile selectByObjectAndName(@Param("objectId") Integer objectId,@Param("name") String name);
+
 }

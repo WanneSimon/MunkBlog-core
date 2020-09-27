@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-09-18
  */
 public interface IImageFileService extends IService<ImageFile> {
-
+	
 }

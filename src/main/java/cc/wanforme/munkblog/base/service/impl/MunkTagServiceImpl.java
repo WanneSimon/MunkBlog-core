@@ -27,4 +27,9 @@ public class MunkTagServiceImpl extends ServiceImpl<MunkTagMapper, MunkTag> impl
 		return this.baseMapper.selectTags(valid.getCode(), type.getCode(), objectId);
 	}
 
+	@Override
+	public void updateTagNameAndValidStatus(MunkTag tag) {
+		this.baseMapper.updateTagNameAndValidStatus(tag);
+	}
+	
 }

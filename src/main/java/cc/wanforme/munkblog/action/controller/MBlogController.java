@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cc.wanforme.munkblog.action.service.MBlogService;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.blog.BlogSearchVo;
+import cc.wanforme.munkblog.vo.blog.BlogVo;
 
 /**博文控制器
  * @author wanne
@@ -34,5 +35,16 @@ public class MBlogController {
 		return blogMunkService.queryBlog(blogId);
 	}
 	
+	@PostMapping("/add")
+	@ResponseBody
+	public ResMessage addBlog(@RequestBody BlogVo blogVo) {
+		return blogMunkService.addBlog(blogVo);
+	}
+	
+	@PostMapping("/update")
+	@ResponseBody
+	public ResMessage updateBlog(@RequestBody BlogVo blogVo) {
+		return blogMunkService.updateBlog(blogVo);
+	}
 	
 }

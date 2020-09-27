@@ -20,4 +20,5 @@ public interface MunkTagMapper extends BaseMapper<MunkTag> {
 	List<MunkTag> selectTags(@Param("valid")String valid, @Param("type") String type,
 			@Param("objectId")int objectId );
 
+	void updateTagNameAndValidStatus(MunkTag tag);
 }

@@ -11,4 +11,10 @@
 		<include refid="ID_DESC" />
 	</select>
 
+	<update id="updateTagNameAndValidStatus" 
+		parameterType="cc.wanforme.munkblog.base.entity.MunkTag">
+		update munk_tag set tag_name=#{tagName}, valid=#{valid} where id=#{id}
+	</update>
+
+
 </mapper>

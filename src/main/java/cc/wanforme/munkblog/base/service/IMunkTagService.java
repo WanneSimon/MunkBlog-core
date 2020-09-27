@@ -20,4 +20,7 @@ public interface IMunkTagService extends IService<MunkTag> {
 	
 	List<MunkTag> selectTags(ObjectTypeEnum type, int objectId, ValidEnum valid);
 	
+	// 更新标签名和标签状态
+	void updateTagNameAndValidStatus(MunkTag tag);
+	
 }

@@ -18,5 +18,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IEfileService extends IService<Efile> {
 
 	List<Efile> selectEfile(EfileSearchVo searchVo);
-	
+
+	/** 查询某个对象特定的文件对象<br>
+	 * @param objectId 对象id
+	 * @param fileName 文件名(非硬盘上的文件明)
+	 */
+	Efile selectByObjectAndName(Integer objectId, String fileName); 
 }

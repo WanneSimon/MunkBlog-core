@@ -27,4 +27,9 @@ public class EfileServiceImpl extends ServiceImpl<EfileMapper, Efile> implements
 		return this.baseMapper.selectEfiles(searchVo);
 	}
 
+	@Override
+	public Efile selectByObjectAndName(Integer objectId, String fileName) {
+		return this.baseMapper.selectByObjectAndName(objectId, fileName);
+	}
+
 }

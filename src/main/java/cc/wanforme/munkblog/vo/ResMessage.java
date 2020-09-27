@@ -10,16 +10,16 @@ public class ResMessage {
 	// 返回码
 	private String code;
 	// 错误信息
-	private String error;
+	private String info;
 	// 成功数据
 	private Object data;
 
 	public ResMessage() {}
 	
-	public ResMessage(String code, String error, Object data) {
+	public ResMessage(String code, String info, Object data) {
 		super();
 		this.code = code;
-		this.error = error;
+		this.info = info;
 		this.data = data;
 	}
 
@@ -31,12 +31,12 @@ public class ResMessage {
 		this.code = code;
 	}
 
-	public String getError() {
-		return error;
+	public String getinfo() {
+		return info;
 	}
 
-	public void setError(String error) {
-		this.error = error;
+	public void setinfo(String info) {
+		this.info = info;
 	}
 
 	public Object getData() {

@@ -1,6 +1,8 @@
 package cc.wanforme.munkblog.action.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -12,6 +14,7 @@ import org.springframework.util.Assert;
 import com.github.pagehelper.PageInfo;
 
 import cc.wanforme.munkblog.base.constant.EditorEnum;
+import cc.wanforme.munkblog.base.constant.FileNameEnum;
 import cc.wanforme.munkblog.base.constant.ObjectTypeEnum;
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.Blog;
@@ -19,6 +22,8 @@ import cc.wanforme.munkblog.base.entity.BlogQuotation;
 import cc.wanforme.munkblog.base.entity.MunkTag;
 import cc.wanforme.munkblog.base.service.IBlogQuotationService;
 import cc.wanforme.munkblog.base.service.IBlogService;
+import cc.wanforme.munkblog.base.service.IEfileService;
+import cc.wanforme.munkblog.base.service.IImageFileService;
 import cc.wanforme.munkblog.base.service.IMunkTagService;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.blog.BlogResultRecorder;
@@ -40,7 +45,15 @@ public class MBlogService {
 	@Autowired
 	private IMunkTagService tagService;
 	
-	// 分页查询
+	@Autowired
+	private MTagService mTagService;
+	@Autowired
+	private MBlogQuotationService mQuotationService;
+	
+//	@Autowired
+//	private IEfileService efileService;
+	
+	/** 分页查询 */
 	public ResMessage searchBlogs(BlogSearchVo searchVo) {
 		BlogResultVo resultVo = new BlogResultVo();
 		resultVo.setPage(searchVo.getPage());
@@ -60,7 +73,7 @@ public class MBlogService {
 	}
 
 	
-	// 具体查询某一篇信息
+	/** 具体查询某一篇信息 */
 	public ResMessage queryBlog(int blogId) {
 		Blog blog = blogService.getById(blogId);
 		if(blog==null) {
@@ -73,6 +86,9 @@ public class MBlogService {
 		// 引用
 		List<BlogQuotation> quotations = blogQuotationService.selectByBlog(blogId);
 		
+		// 查询有关的图片
+//		efileService.selectByObjectAndName(blog.getId(), FileNameEnum.BACKGROUND_IMAGE.getCode());
+		
 		BlogVo bv = new BlogVo();
 		BeanUtils.copyProperties(blog, bv);
 		bv.setTags(tags);
@@ -81,9 +97,9 @@ public class MBlogService {
 		return ResMessage.newSuccessMessage(bv);
 	}
 	
-	
+	/** 添加*/
 	@Transactional(rollbackFor = Exception.class)
-	public ResMessage saveBlog(BlogVo blogVo) {
+	public ResMessage addBlog(BlogVo blogVo) {
 		Assert.notNull(blogVo, "没有数据");
 		Assert.notNull(blogVo.getTitle(), "没有标题");
 		Assert.notNull(blogVo.getContent(), "没有内容");
@@ -126,8 +142,36 @@ public class MBlogService {
 			}
 		}
 		
-		return ResMessage.newSuccessMessage("保存成功");
+		return ResMessage.newSuccessMessage(null);
 	}
-	
+
+
+	/** 更新,<br>
+	 * 不允许更改 创建时间和最后床创建时间<br>
+	 * 标签只能更改名字和生效状态
+	 * */
+	@Transactional(rollbackFor = Exception.class)
+	public ResMessage updateBlog(BlogVo blogVo) {
+		Assert.notNull(blogVo, "没有数据");
+		Assert.notNull(blogVo.getId(), "没有id");
+		Assert.notNull(blogVo.getTitle(), "没有标题");
+		Assert.notNull(blogVo.getContent(), "没有内容");
+		Assert.notNull(blogVo.getGroupType(), "没有归档");
+		Assert.notNull(blogVo.getEditor(), "没有编辑器");
+		Assert.notNull(blogVo.getValid(), "没有生效标志");
+		
+		blogVo.setContent(null);
+		blogVo.setUpdateTime(null);
+		
+		// 允许移除所有标签，列表置为 空列表即可
+		mTagService.updateTags(blogVo.getId(), blogVo.getTags());
+		
+		// 允许移除所有引用，列表置为 空列表即可
+		mQuotationService.updateQuotations(blogVo.getId(), blogVo.getQuotations());
+		
+		return ResMessage.newSuccessMessage(null);
+	}
+
+
 	
 }
