@@ -96,9 +96,9 @@ public class MBlogService {
 	@Transactional(rollbackFor = Exception.class)
 	public ResMessage addBlog(BlogVo blogVo) {
 		Assert.notNull(blogVo, "没有数据");
-		Assert.notNull(blogVo.getTitle(), "没有标题");
-		Assert.notNull(blogVo.getContent(), "没有内容");
-		Assert.notNull(blogVo.getContent(), "没有归类");
+		Assert.hasText(blogVo.getTitle(), "没有标题");
+		Assert.hasText(blogVo.getContent(), "没有内容");
+		Assert.hasText(blogVo.getContent(), "没有归类");
 		
 		LocalDateTime now = LocalDateTime.now();
 		
@@ -149,9 +149,9 @@ public class MBlogService {
 	public ResMessage updateBlog(BlogVo blogVo) {
 		Assert.notNull(blogVo, "没有数据");
 		Assert.notNull(blogVo.getId(), "没有id");
-		Assert.notNull(blogVo.getTitle(), "没有标题");
-		Assert.notNull(blogVo.getContent(), "没有内容");
-		Assert.notNull(blogVo.getGroupType(), "没有归档");
+		Assert.hasText(blogVo.getTitle(), "没有标题");
+		Assert.hasText(blogVo.getContent(), "没有内容");
+		Assert.hasText(blogVo.getGroupType(), "没有归档");
 		Assert.notNull(blogVo.getEditor(), "没有编辑器");
 		Assert.notNull(blogVo.getValid(), "没有生效标志");
 		
