@@ -23,6 +23,7 @@ import cc.wanforme.munkblog.base.entity.Book;
 import cc.wanforme.munkblog.base.entity.ImageFile;
 import cc.wanforme.munkblog.base.service.IBookService;
 import cc.wanforme.munkblog.base.service.IImageFileService;
+import cc.wanforme.munkblog.util.MunkBeanUtils;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.book.BookSearchVo;
 import cc.wanforme.munkblog.vo.book.BookVo;
@@ -103,7 +104,8 @@ public class MBookService {
 			BeanUtils.copyProperties(cover, coverVo);
 		}
 		
-		return ResMessage.newSuccessMessage(book);
+		BeanUtils.copyProperties(book, bookVo);
+		return ResMessage.newSuccessMessage("添加成功", book);
 	}
 	
 	/** 更新*/
@@ -113,20 +115,33 @@ public class MBookService {
 		Assert.notNull(bookVo.getId(), "没有id");
 		StringBuffer resMsg = new StringBuffer();
 		
+		Book po = bookService.getById(bookVo.getId());
+		if( po == null) {
+			return ResMessage.newFailMessage("书籍不存在");
+		}
+		
+		bookVo.setCreateTime(null);
+		bookVo.setUpdateTime(null);
+		
 		// 书名和描述可以均为空，表示更新封面
 		if(!StringUtils.isAllBlank(bookVo.getName(),
 				bookVo.getDescription())) {
 			Assert.notNull(bookVo.getName(), "没有书名");
 			Assert.notNull(bookVo.getDescription(), "没有描述");			
 			
-			Book book = new Book();
-			BeanUtils.copyProperties(book, bookVo);
-			book.setCreateTime(null);
-			book.setUpdateTime(null);
-			bookService.updateById(book);
+//			Book book = new Book();
+//			BeanUtils.copyProperties(book, bookVo);
+//			book.setCreateTime(null);
+//			book.setUpdateTime(null);
+//			bookService.updateById(book);
 			
 			// 获取返回信息
-			BeanUtils.copyProperties(book, bookVo);
+//			BeanUtils.copyProperties(book, bookVo);
+			
+			MunkBeanUtils.copyNotNullProperties(bookVo, po);
+			bookService.updateById(po);
+			
+			BeanUtils.copyProperties(po, bookVo);
 			resMsg.append("书信息更新成功 ");
 		} else {
 			log.info("不需要更新书籍信息: "+ bookVo.getId());

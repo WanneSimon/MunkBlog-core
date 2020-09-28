@@ -3,6 +3,7 @@ package cc.wanforme.munkblog.action.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import cc.wanforme.munkblog.base.entity.MunkTag;
 import cc.wanforme.munkblog.base.service.IBlogQuotationService;
 import cc.wanforme.munkblog.base.service.IBlogService;
 import cc.wanforme.munkblog.base.service.IMunkTagService;
+import cc.wanforme.munkblog.util.MunkBeanUtils;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.blog.BlogResultRecorder;
 import cc.wanforme.munkblog.vo.blog.BlogResultVo;
@@ -149,19 +151,33 @@ public class MBlogService {
 	public ResMessage updateBlog(BlogVo blogVo) {
 		Assert.notNull(blogVo, "没有数据");
 		Assert.notNull(blogVo.getId(), "没有id");
-		Assert.hasText(blogVo.getTitle(), "没有标题");
-		Assert.hasText(blogVo.getContent(), "没有内容");
-		Assert.hasText(blogVo.getGroupType(), "没有归档");
-		Assert.notNull(blogVo.getEditor(), "没有编辑器");
-		Assert.notNull(blogVo.getValid(), "没有生效标志");
+//		Assert.hasText(blogVo.getTitle(), "没有标题");
+//		Assert.hasText(blogVo.getContent(), "没有内容");
+//		Assert.hasText(blogVo.getGroupType(), "没有归档");
+//		Assert.notNull(blogVo.getEditor(), "没有编辑器");
+//		Assert.notNull(blogVo.getValid(), "没有生效标志");
 		
 		blogVo.setContent(null);
 		blogVo.setUpdateTime(null);
 		
-		// 博文更新
-		Blog blog = new Blog();
-		BeanUtils.copyProperties(blogVo, blog);
-		blogService.updateById(blog);
+		Blog po = blogService.getById(blogVo.getId());
+		if(po == null) {
+			return ResMessage.newFailMessage("没有此博文");
+		}
+		
+		if(!StringUtils.isAllBlank( blogVo.getTitle(), blogVo.getContent(),
+				blogVo.getGroupType(), blogVo.getEditor(), blogVo.getValid())) {
+			// 博文更新
+//			Blog blog = new Blog();
+//			BeanUtils.copyProperties(blogVo, blog);
+//			blogService.updateById(blog);
+			
+			MunkBeanUtils.copyNotNullProperties(blogVo, po);
+			blogService.updateById(po);
+			
+			BeanUtils.copyProperties(po, blogVo);
+		}
+		
 		
 		// 允许移除所有标签，列表置为 空列表即可
 		mTagService.updateTags(blogVo.getId(), blogVo.getTags());
@@ -169,7 +185,7 @@ public class MBlogService {
 		// 允许移除所有引用，列表置为 空列表即可
 		mQuotationService.updateQuotations(blogVo.getId(), blogVo.getQuotations());
 		
-		return ResMessage.newSuccessMessage(null);
+		return ResMessage.newSuccessMessage(blogVo);
 	}
 
 
@@ -180,7 +196,7 @@ public class MBlogService {
 		Blog blog = blogService.getById(blogId);
 		blog.setValid(ValidEnum.INVALID.getCode());
 		blogService.updateById(blog);
-		return ResMessage.newSuccessMessage(null);
+		return ResMessage.newSuccessMessage("删除成功", null);
 	}
 
 

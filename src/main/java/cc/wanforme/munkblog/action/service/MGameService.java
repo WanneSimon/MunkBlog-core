@@ -23,6 +23,7 @@ import cc.wanforme.munkblog.base.entity.Game;
 import cc.wanforme.munkblog.base.entity.ImageFile;
 import cc.wanforme.munkblog.base.service.IGameService;
 import cc.wanforme.munkblog.base.service.IImageFileService;
+import cc.wanforme.munkblog.util.MunkBeanUtils;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.game.GameSearchVo;
 import cc.wanforme.munkblog.vo.game.GameVo;
@@ -113,20 +114,29 @@ public class MGameService {
 		Assert.notNull(gameVo.getId(), "没有id");
 		StringBuffer resMsg = new StringBuffer();
 		
+		Game po = gameService.getById(gameVo.getId());
+		if( po == null) {
+			return ResMessage.newFailMessage("书籍不存在");
+		}
+		
+		gameVo.setCreateTime(null);
+		gameVo.setUpdateTime(null);
+		
 		// 书名和描述可以均为空，表示更新封面
 		if(!StringUtils.isAllBlank(gameVo.getName(),
 				gameVo.getDescription())) {
-			Assert.notNull(gameVo.getName(), "没有书名");
-			Assert.notNull(gameVo.getDescription(), "没有描述");			
 			
-			Game game = new Game();
-			BeanUtils.copyProperties(game, gameVo);
-			game.setCreateTime(null);
-			game.setUpdateTime(null);
-			gameService.updateById(game);
+//			Game game = new Game();
+//			BeanUtils.copyProperties(game, gameVo);
+//			game.setCreateTime(null);
+//			game.setUpdateTime(null);
+//			gameService.updateById(game);
+
+			MunkBeanUtils.copyNotNullProperties(gameVo, po);
+			gameService.updateById(po);
 			
 			// 获取返回信息
-			BeanUtils.copyProperties(game, gameVo);
+			BeanUtils.copyProperties(po, gameVo);
 			resMsg.append("书信息更新成功 ");
 		} else {
 			log.info("不需要更新书籍信息: "+ gameVo.getId());
@@ -196,6 +206,5 @@ public class MGameService {
 		
 		return ResMessage.newSuccessMessage("删除成功", null);
 	}
-	
 	
 }
