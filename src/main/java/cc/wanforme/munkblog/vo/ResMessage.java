@@ -52,6 +52,9 @@ public class ResMessage {
 	public static ResMessage newMessage(ResCode code, String messasge, Object data) {
 		return new ResMessage(code.getCode(), messasge, data);
 	}
+	public static ResMessage newSuccessMessage(String message,Object data) {
+		return new ResMessage(ResCode.SUCCESS.getCode(), message, data);
+	}
 	public static ResMessage newSuccessMessage(Object data) {
 		return new ResMessage(ResCode.SUCCESS.getCode(), ResCode.SUCCESS.getDescription(), data);
 	}

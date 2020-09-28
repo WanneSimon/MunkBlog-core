@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cc.wanforme.munkblog.action.service.MBookService;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.book.BookSearchVo;
+import cc.wanforme.munkblog.vo.book.BookVo;
 
 /**
  * @author wanne
@@ -29,5 +30,21 @@ public class MBookController {
 		return bookService.searchBook(searchVo);
 	}
 	
+	@PostMapping("/add")
+	@ResponseBody
+	public ResMessage addBook(@RequestBody BookVo bookVo) {
+		return bookService.addBook(bookVo);
+	}
 	
+	@PostMapping("/update")
+	@ResponseBody
+	public ResMessage updateBook(@RequestBody BookVo bookVo) {
+		return bookService.updateBook(bookVo);
+	}
+
+	@PostMapping("/delete")
+	@ResponseBody
+	public ResMessage deleteBook(@RequestBody int bookId) {
+		return bookService.deleteBook(bookId);
+	}
 }

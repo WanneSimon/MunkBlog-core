@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.ImageFileMapper">
 
+	<sql id="ID_ASC">
+		order by id asc
+	</sql>
 	<sql id="ID_DESC">
 		order by id desc
 	</sql>
@@ -9,8 +12,11 @@
 	<select id="selectBooks" 
 		resultType="cc.wanforme.munkblog.base.entity.ImageFile">
 		select * from image_file 
-		  where valid = #{valid} and object_id=#{objectId}
-		  <include refid="ID_DESC" />
+		  <where>
+		  	<if test="valid != null"> valid = #{valid} and </if>
+		  	object_id=#{objectId}
+		  </where> 
+		  <include refid="ID_ASC" />
 	</select>
 	
 	<select id="selectByTypeWithObjectId" 

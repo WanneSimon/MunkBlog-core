@@ -6,6 +6,8 @@ import cc.wanforme.munkblog.base.service.IGameService;
 import cc.wanforme.munkblog.vo.game.GameSearchVo;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -23,8 +25,10 @@ import org.springframework.stereotype.Service;
 public class GameServiceImpl extends ServiceImpl<GameMapper, Game> implements IGameService {
 
 	@Override
-	public List<Game> selectGames(GameSearchVo searchVo) {
-		return this.baseMapper.selectGames(searchVo);
+	public PageInfo<Game> selectGames(GameSearchVo searchVo) {
+		PageHelper.startPage(searchVo.getPage(), searchVo.getSize());
+		List<Game> data =  this.baseMapper.selectGames(searchVo);
+		return new PageInfo<Game>(data);
 	}
 	
 }

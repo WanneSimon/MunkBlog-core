@@ -18,10 +18,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ImageFileMapper extends BaseMapper<ImageFile> {
 	
+	/**
+	 * @param valid 为空即是否有效都要查询
+	 * @param objectId
+	 * @return
+	 */
 	List<ImageFile> selectByObjectId(@Param("valid") String valid, @Param("objectId") int objectId);
 	
 	List<ImageFile> selectByTypeWithObjectId(@Param("valid")String valid, @Param("objectId") int objectId,
 			@Param("type") String type);
-	
-	
+
 }

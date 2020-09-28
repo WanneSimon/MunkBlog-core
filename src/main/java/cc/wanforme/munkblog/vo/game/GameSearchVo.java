@@ -1,10 +1,12 @@
 package cc.wanforme.munkblog.vo.game;
 
+import cc.wanforme.munkblog.vo.SearchVo;
+
 /**
  * @author wanne
  * 2020年9月21日
  */
-public class GameSearchVo {
+public class GameSearchVo extends SearchVo{
 
 	private String name;
 

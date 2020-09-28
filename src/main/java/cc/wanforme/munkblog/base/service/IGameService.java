@@ -3,9 +3,8 @@ package cc.wanforme.munkblog.base.service;
 import cc.wanforme.munkblog.base.entity.Game;
 import cc.wanforme.munkblog.vo.game.GameSearchVo;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
 
 /**
  * <p>
@@ -17,6 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IGameService extends IService<Game> {
 	
-	List<Game> selectGames(GameSearchVo searchVo);
+	PageInfo<Game> selectGames(GameSearchVo searchVo);
 	
 }
