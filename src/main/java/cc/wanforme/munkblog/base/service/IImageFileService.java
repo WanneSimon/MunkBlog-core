@@ -2,6 +2,7 @@ package cc.wanforme.munkblog.base.service;
 
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.ImageFile;
+import cc.wanforme.munkblog.vo.efile.ImageVo;
 
 import java.util.List;
 
@@ -29,6 +30,10 @@ public interface IImageFileService extends IService<ImageFile> {
 	
 	List<ImageFile> selectByTypeWithObjectId(ValidEnum valid, int objectId, String type);
 
-	
+	/** 查询对象的所有 imageVo*/
+	List<ImageVo> selectObjectImageVos( int objectId);
+
+	/** 查询对象某一个 imageVO*/
+	ImageVo selectImageVoByObjectAndName( int objectId, String name);
 	
 }

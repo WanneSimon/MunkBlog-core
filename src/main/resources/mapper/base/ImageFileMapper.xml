@@ -9,6 +9,11 @@
 		order by id desc
 	</sql>
 
+	<sql id="SELECT_IMAGEVO">
+	    a.id as imageFileId, a.object_id as objectId, a.type as imageFileType, a.valid as imageFileValid, 
+  	    b.name as name, b.file_name as realName, b.type as efileType, b.valid as efileValid, b.create_time as efileCreateTime, b.update_time as efileUpdateTime
+	</sql>
+
 	<select id="selectBooks" 
 		resultType="cc.wanforme.munkblog.base.entity.ImageFile">
 		select * from image_file 
@@ -27,5 +32,18 @@
 		  	and object_id=#{objectId}
 		  	<include refid="ID_DESC" />
 	</select>
+	
+	<select id="selectObjectImageVos" resultType="cc.wanforme.munkblog.vo.efile.ImageVo">
+	  select <include refid="SELECT_IMAGEVO" />
+	  from  ( select * from image_file where object_id=#{objectId} ) a, efile b 
+	  where a.file_id = b.id 
+	</select>
+	
+	<select id="selectImageVoByObjectAndName" resultType="cc.wanforme.munkblog.vo.efile.ImageVo">
+	  select <include refid="SELECT_IMAGEVO" />
+	  from  ( select * from image_file where object_id=#{objectId} ) a, efile b 
+	  where a.file_id = b.id  and b.name=#{name}
+	</select>
+	
 	
 </mapper>

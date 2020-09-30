@@ -4,6 +4,8 @@ import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.ImageFile;
 import cc.wanforme.munkblog.base.mapper.ImageFileMapper;
 import cc.wanforme.munkblog.base.service.IImageFileService;
+import cc.wanforme.munkblog.vo.efile.ImageVo;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.util.List;
@@ -34,6 +36,16 @@ public class ImageFileServiceImpl extends ServiceImpl<ImageFileMapper, ImageFile
 	@Override
 	public List<ImageFile> selectByTypeWithObjectId(ValidEnum valid, int objectId, String type) {
 		return this.baseMapper.selectByTypeWithObjectId(valid.getCode(), objectId, type);
+	}
+
+	@Override
+	public List<ImageVo> selectObjectImageVos(int objectId) {
+		return this.baseMapper.selectObjectImageVos(objectId);
+	}
+
+	@Override
+	public ImageVo selectImageVoByObjectAndName(int objectId, String name) {
+		return this.selectImageVoByObjectAndName(objectId, name);
 	}
 
 }

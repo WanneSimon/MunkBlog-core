@@ -1,6 +1,7 @@
 package cc.wanforme.munkblog.base.mapper;
 
 import cc.wanforme.munkblog.base.entity.ImageFile;
+import cc.wanforme.munkblog.vo.efile.ImageVo;
 
 import java.util.List;
 
@@ -28,4 +29,10 @@ public interface ImageFileMapper extends BaseMapper<ImageFile> {
 	List<ImageFile> selectByTypeWithObjectId(@Param("valid")String valid, @Param("objectId") int objectId,
 			@Param("type") String type);
 
+	/** 查询对象的所有 imageVo*/
+	List<ImageVo> selectObjectImageVos(@Param("objectId") int objectId);
+
+	/** 查询对象某一个 imageVO*/
+	ImageVo selectImageVoByObjectAndName(@Param("objectId") int objectId, @Param("name") String name);
+	
 }
