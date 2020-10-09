@@ -33,5 +33,17 @@ public class MComicWordsController {
 	public ResMessage addComicWords(@RequestBody ComicWordsVo comicWordsVo) {
 		return mComicWordsService.addComicWords(comicWordsVo);
 	}
+
+	@RequestMapping("/get")
+	@ResponseBody
+	public ResMessage getComicWords(@RequestBody ComicWordsVo vo) {
+		return mComicWordsService.getComicWords(vo.getId());
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public ResMessage updateComicWords(@RequestBody ComicWordsVo vo) {
+		return mComicWordsService.updateComicWords(vo);
+	}
 	
 }

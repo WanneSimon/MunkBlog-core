@@ -8,7 +8,15 @@ import cc.wanforme.munkblog.vo.SearchVo;
  */
 public class DailyLogSearchVo extends SearchVo{
 	
+	private String content;
 	private String valid;
+	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	
 	public String getValid() {
 		return valid;

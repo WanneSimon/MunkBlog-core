@@ -11,6 +11,7 @@
 	  select * from daily_log
 	  <where>
 	  	valid=#{valid}
+	  	<if test='content!=null'> and content like concat('%', #{content}, '%') </if>
 	  </where>
 	  <include refid="ID_DESC" />
 	</select>

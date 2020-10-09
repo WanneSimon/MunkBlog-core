@@ -87,5 +87,14 @@ public class MComicWordsService {
 		
 		return ResMessage.newSuccessMessage("语录更新成功", po);
 	}
+
+	public ResMessage getComicWords(int id) {
+		ComicWords cw = comicWordsService.getById(id);
+		
+		ComicWordsVo vo = new ComicWordsVo();
+		BeanUtils.copyProperties(cw, vo);
+		
+		return ResMessage.newSuccessMessage("获取成功", vo);
+	}
 	
 }
