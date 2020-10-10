@@ -83,29 +83,13 @@ public class DatabaseConfiguration {
 		sqlSessionFactory.setConfiguration(configuration);
 		
 		// PerformanceInterceptor(),OptimisticLockerInterceptor()
-		// 添加分页功能
-	    sqlSessionFactory.setPlugins(new Interceptor[]{
-	    	mybatisPlusInterceptor()
-	    });
+		// 添加分页功能 （使用PageHelper，忽略）
+//	    sqlSessionFactory.setPlugins(new Interceptor[]{
+//	    	mybatisPlusInterceptor()
+//	    });
 		
 	    
 	    return sqlSessionFactory.getObject();
 	}
-	
-    /**
-     * 分页插件
-     */
-    @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor() {
-        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.H2));
-        return interceptor;
-    }
-    
-    @Bean
-    public ConfigurationCustomizer configurationCustomizer() {
-        return configuration -> configuration.setUseDeprecatedExecutor(false);
-    }
-    
 	
 }
