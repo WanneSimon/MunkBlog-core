@@ -23,7 +23,6 @@ public class MBookController {
 	@Autowired
 	private MBookService bookService;
 	
-	@RequestMapping
 	@PostMapping("/search")
 	@ResponseBody
 	public ResMessage searchBook(@RequestBody BookSearchVo searchVo) {
@@ -34,6 +33,12 @@ public class MBookController {
 	@ResponseBody
 	public ResMessage addBook(@RequestBody BookVo bookVo) {
 		return bookService.addBook(bookVo);
+	}
+	
+	@PostMapping("/get")
+	@ResponseBody
+	public ResMessage getBook(@RequestBody BookVo bookVo) {
+		return bookService.getBook(bookVo.getId());
 	}
 	
 	@PostMapping("/update")
@@ -47,4 +52,6 @@ public class MBookController {
 	public ResMessage deleteBook(@RequestBody int bookId) {
 		return bookService.deleteBook(bookId);
 	}
+	
+	
 }

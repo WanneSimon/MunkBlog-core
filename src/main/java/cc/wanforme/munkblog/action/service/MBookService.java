@@ -52,12 +52,13 @@ public class MBookService {
 		List<BookVo> bookVos = new ArrayList<>(books.size());
 		books.forEach( e -> {
 			BookVo bookVo = new BookVo();
-			BeanUtils.copyProperties(e, bookVos);
+			BeanUtils.copyProperties(e, bookVo);
 			
 			List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, e.getId());
 			if( images!=null && !images.isEmpty()) {
 				bookVo.setCover(images.get(0));
 			}
+			bookVos.add(bookVo);
 		});
 		
 		
@@ -210,6 +211,16 @@ public class MBookService {
 		}
 		
 		return ResMessage.newSuccessMessage("删除成功", null);
+	}
+
+	/** 获取书籍信息*/
+	public ResMessage getBook(int id) {
+		Book po = bookService.getById(id);
+		
+		BookVo vo = new BookVo();
+		BeanUtils.copyProperties(po, vo);
+		
+		return ResMessage.newSuccessMessage("获取成功", vo);
 	}
 	
 }

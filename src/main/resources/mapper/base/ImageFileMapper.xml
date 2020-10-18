@@ -24,6 +24,14 @@
 		  <include refid="ID_ASC" />
 	</select>
 	
+	<select id="selectByObjectId" 
+		resultType="cc.wanforme.munkblog.base.entity.ImageFile">
+		select * from image_file 
+		  where valid = #{valid} 
+		  	and object_id=#{objectId}
+		  	<include refid="ID_DESC" />
+	</select>
+	
 	<select id="selectByTypeWithObjectId" 
 		resultType="cc.wanforme.munkblog.base.entity.ImageFile">
 		select * from image_file 
