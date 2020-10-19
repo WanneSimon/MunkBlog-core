@@ -206,5 +206,16 @@ public class MGameService {
 		
 		return ResMessage.newSuccessMessage("删除成功", null);
 	}
+
+
+	/** 获取游戏*/ 
+	public ResMessage getGame(int id) {
+		Game po = gameService.getById(id);
+		
+		GameVo vo = new GameVo();
+		BeanUtils.copyProperties(po, vo);
+		
+		return ResMessage.newSuccessMessage("获取成功", vo);
+	}
 	
 }
