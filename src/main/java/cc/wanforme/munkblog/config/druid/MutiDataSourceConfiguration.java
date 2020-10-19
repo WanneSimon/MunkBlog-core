@@ -22,7 +22,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+//import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 
 /** 使用多数据源，一定要检查这里和yml文件中的配置<br>
  * 注：使用多数据源请放开 @Configuration, 同时关闭另一个类 - DatabaseConfiguration
@@ -178,10 +178,10 @@ public class MutiDataSourceConfiguration {
     /**
      * 分页插件
      */
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
+//    @Bean
+//    public PaginationInterceptor paginationInterceptor() {
+//        return new PaginationInterceptor();
+//    }
 	
 }
 	
