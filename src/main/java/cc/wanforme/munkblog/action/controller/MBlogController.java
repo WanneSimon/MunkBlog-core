@@ -29,10 +29,10 @@ public class MBlogController {
 		return blogMunkService.searchBlogs(queryVo);
 	}
 	
-	@PostMapping("/info")
+	@PostMapping("/get")
 	@ResponseBody
-	public ResMessage blogInfo(@RequestBody int blogId) {
-		return blogMunkService.queryBlog(blogId);
+	public ResMessage blogInfo(@RequestBody BlogVo blogVo) {
+		return blogMunkService.queryBlog(blogVo.getId());
 	}
 	
 	@PostMapping("/add")

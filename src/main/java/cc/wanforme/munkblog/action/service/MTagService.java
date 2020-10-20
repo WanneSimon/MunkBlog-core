@@ -2,6 +2,8 @@ package cc.wanforme.munkblog.action.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +34,7 @@ public class MTagService {
 	 * @param tagVos
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public void updateTags(int objectId, List<MunkTag> tagVos) {
+	public void updateTags(int objectId, ObjectTypeEnum type, List<MunkTag> tagVos) {
 		if(tagVos == null) {
 			log.info("没有需要更新的标签 [objectId: "+objectId+"]");
 			return;
@@ -48,23 +50,65 @@ public class MTagService {
 		List<MunkTag> tagCopyVos = new ArrayList<>(tagVos);
 
 		// 交集(更新)，相同的 （tagCopyVos已变成需要更新的集合）
-		tagCopyVos.retainAll(tags);
+//		tagCopyVos.retainAll(tags);
+		tagCopyVos = this.retainTags(tagCopyVos, tags);
 		tagCopyVos.forEach( e->{ 
 			// 只能改名字和生效状态
 			tagService.updateTagNameAndValidStatus(e);
 		});
 		
 		// 差集(新增)，源数据库没有，现在更新有了（tagVos已变成需要增加的集合）
-		tagVos.removeAll(tagCopyVos);
+//		tagVos.removeAll(tagCopyVos);
+		tagVos = this.removeTags(tagVos, tagCopyVos);
 		tagVos.forEach( e-> {
+			e.setObjectId(objectId);
+			e.setType(type.getCode());
 			tagService.save(e);
 		});
 		
 		// 差集(删除)，原数据库有的，现在更新没了（tags已变成需要删除的集合）
-		tags.removeAll(tagCopyVos);
+//		tags.removeAll(tagCopyVos);
+		tags = this.removeTags(tags, tagCopyVos);
 		tags.forEach( e-> {
 			tagService.removeById(e.getId());
 		});
+	}
+
+	/** 判断是不是同又给标签，依据：*/
+	public boolean isSameTag(MunkTag t1, MunkTag t2) {
+		return t1.getTagName().equals(t2.getTagName())
+				&& t1.getObjectId()==t2.getObjectId() 
+				&& t1.getType().equals(t2.getType());
+	}
+
+	/** 查询两个集合的交集
+	 * @param source
+	 * @param another
+	 */
+	public List<MunkTag> retainTags(List<MunkTag> source, List<MunkTag> another) {
+		List<MunkTag> list = source.stream().filter( e-> {
+			Optional<MunkTag> findAny = another.parallelStream()
+				.filter( ae -> isSameTag(e, ae)).findAny();
+			return findAny.isPresent();
+//			return another.parallelStream().filter( ae -> isSameTag(e, ae))
+//					.findAny().isPresent();
+		}).collect(Collectors.toList());
+		return list;
+	}
+	
+	/** 从 source 中删除 another中含有的元素
+	 * @param source
+	 * @param another 需要删除的部分
+	 */
+	public List<MunkTag> removeTags(List<MunkTag> source, List<MunkTag> another) {
+		List<MunkTag> list = source.stream().filter( e-> {
+			Optional<MunkTag> findAny = another.parallelStream()
+				.filter( ae -> isSameTag(e, ae)).findAny();
+			return !findAny.isPresent();
+//			return another.parallelStream().filter( ae -> isSameTag(e, ae))
+//					.findAny().isPresent();
+		}).collect(Collectors.toList());;
+		return list;
 	}
 	
 	public static void main(String[] args) {

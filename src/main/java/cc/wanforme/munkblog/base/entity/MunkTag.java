@@ -1,6 +1,10 @@
 package cc.wanforme.munkblog.base.entity;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -13,10 +17,11 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2020-09-18
  */
 @ApiModel(value="MunkTag对象", description="各种对象的标签")
-public class MunkTag implements Serializable {
+public class MunkTag implements Serializable,Comparable<MunkTag> {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "标签名")
@@ -31,7 +36,22 @@ public class MunkTag implements Serializable {
     @ApiModelProperty(value = "0-失效, 1-生效")
     private String valid;
 
-
+	@Override
+	public int compareTo(MunkTag o) {
+		return (tagName+objectId+type).compareTo(o.tagName+o.objectId+o.type);
+	}
+	
+//    @Override
+//    public String toString() {
+//        return "MunkTag{" +
+//        "id=" + id +
+//        ", tagName=" + tagName +
+//        ", objectId=" + objectId +
+//        ", type=" + type +
+//        ", valid=" + valid +
+//        "}";
+//    }
+	
     public Integer getId() {
         return id;
     }
@@ -72,14 +92,4 @@ public class MunkTag implements Serializable {
         this.valid = valid;
     }
 
-    @Override
-    public String toString() {
-        return "MunkTag{" +
-        "id=" + id +
-        ", tagName=" + tagName +
-        ", objectId=" + objectId +
-        ", type=" + type +
-        ", valid=" + valid +
-        "}";
-    }
 }

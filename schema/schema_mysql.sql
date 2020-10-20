@@ -177,7 +177,7 @@ CREATE TABLE `image_file`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `munk_tag`;
 CREATE TABLE `munk_tag`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标签名',
   `object_id` int(11) DEFAULT NULL COMMENT '对象id',
   `type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '所属对象的类型, 博文-Blog, 日志-DailyLog, 书架-Books, 游戏-Games',

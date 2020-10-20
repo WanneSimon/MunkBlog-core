@@ -180,7 +180,7 @@ public class MBlogService {
 		
 		
 		// 允许移除所有标签，列表置为 空列表即可
-		mTagService.updateTags(blogVo.getId(), blogVo.getTags());
+		mTagService.updateTags(blogVo.getId(), ObjectTypeEnum.BLOG, blogVo.getTags());
 		
 		// 允许移除所有引用，列表置为 空列表即可
 		mQuotationService.updateQuotations(blogVo.getId(), blogVo.getQuotations());
