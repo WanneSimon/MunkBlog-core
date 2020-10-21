@@ -65,6 +65,7 @@ public class MBlogService {
 //		List<BlogResultRecorder> blogsRecorders = blogService.queryBlogs(searchVo);
 		PageInfo<BlogResultRecorder> blogs = blogService.queryBlogs(searchVo);
 		resultVo.setDatas(blogs.getList());
+		resultVo.setTotalPage(blogs.getPages());
 		
 		return ResMessage.newSuccessMessage(resultVo);
 	}

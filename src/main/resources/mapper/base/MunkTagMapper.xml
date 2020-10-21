@@ -5,10 +5,14 @@
 	<sql id="ID_DESC">
 		order by id desc
 	</sql>
+	
+	<sql id="ID_ASC">
+		order by id asc
+	</sql>
 
 	<select id="selectTags" resultType="cc.wanforme.munkblog.base.entity.MunkTag">
 		select * from munk_tag where valid=#{valid} and type=#{type} and object_id=#{objectId} 
-		<include refid="ID_DESC" />
+		<include refid="ID_ASC" />
 	</select>
 
 	<update id="updateTagNameAndValidStatus" 
