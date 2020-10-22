@@ -11,6 +11,7 @@ public enum ObjectTypeEnum {
 	BOOK("Book", "书"),
 	GAME("Game", "游戏"),
 	COMIC_WORDS("ComicWords", "语录"),
+	TEMP_FILE("TEMP", "临时文件"),
 	;
 	
 	private String code;

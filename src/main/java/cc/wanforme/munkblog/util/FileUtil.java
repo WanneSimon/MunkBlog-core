@@ -1,10 +1,16 @@
 package cc.wanforme.munkblog.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import cc.wanforme.munkblog.base.constant.FileDownloadEnum;
 
@@ -14,6 +20,39 @@ import cc.wanforme.munkblog.base.constant.FileDownloadEnum;
  */
 public class FileUtil {
 
+	
+	/** 检查文件重名并重命名
+	 * @param path 相对路径或绝对路径
+	 * @return
+	 */
+	public static String checkAndRenameFile(String path){
+		int count = 0;
+		String newname = path;
+		
+		int in = path.lastIndexOf('.');
+		String part1 = path;
+		String suffix = "";
+		if(in > 0 )  {
+//			newname =  +"("+count+")" +path.substring(in);
+			part1 = path.substring(0, in);
+			suffix = path.substring(in);
+		}
+		
+		do {
+			File file = new File(newname);
+			if( !Files.exists(file.toPath(), LinkOption.NOFOLLOW_LINKS) ) {
+				break;
+			}
+			
+			count++;
+			newname = part1+"("+count+")" +suffix;
+		} while(true);
+		
+		
+		return newname;
+	}
+
+	
 
 	public static void downloadFile2Client(InputStream is, String name, String type,
 			HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -67,5 +106,18 @@ public class FileUtil {
 		
 		inputStream.skip(pos);
 	}
+	
+	/** 上传文件*/
+	public static void saveFile(MultipartFile file, File saveFile) throws IOException {
+		try (InputStream is = file.getInputStream();
+			 FileOutputStream fos = new FileOutputStream(saveFile);) {
+			byte[] bs = new byte[10240];
+			int len = 0;
+			while ( (len = is.read(bs)) != -1) {
+				fos.write(bs, 0, len);
+			}
+		}
+	}
+	
 	
 }
