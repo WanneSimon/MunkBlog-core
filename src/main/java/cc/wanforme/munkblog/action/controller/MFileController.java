@@ -1,7 +1,16 @@
 package cc.wanforme.munkblog.action.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import cc.wanforme.munkblog.action.service.MFileService;
+import cc.wanforme.munkblog.vo.ResMessage;
 
 /** 文件接口
  * @author wanne
@@ -11,4 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/file")
 public class MFileController {
 
+	@Autowired
+	private MFileService mfileService;
+	
+	@RequestMapping("/upload")
+	@ResponseBody
+	public ResMessage uploadFile(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
+		return mfileService.uploadFile(file, request, response);
+	}
+	
+	
 }

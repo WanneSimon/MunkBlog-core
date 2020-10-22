@@ -59,3 +59,9 @@ pagehelper:
    support-methods-arguments: true
    pageSizeZero: true
    params: count=countSql
+
+files:
+   # 所有文件路径，注意  '/' 结尾
+   uploadDir: file/uploads/ # 文件上传临时路径 
+   saveDir: file/save/ # 保存文件的路径
+   renameTryTime: 10 # 重命名文件时最大重复次数
