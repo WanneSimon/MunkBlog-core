@@ -92,11 +92,16 @@ pagehelper:
    pageSizeZero: true
    params: count=countSql
 
+######### 文件上传和存储相关 #############
 files:
    # 所有文件路径，注意  '/' 结尾
    uploadDir: file/uploads/ # 文件上传临时路径 
    saveDir: file/save/ # 保存文件的路径
    renameTryTime: 10 # 重命名文件时最大重复次数
-   
+
+######### token相关 #############
+token:
+   expireDays: 1 # token失效时间，默认一天
+   name: mbhbosT# token名，默认 mbhbosT
    
    
