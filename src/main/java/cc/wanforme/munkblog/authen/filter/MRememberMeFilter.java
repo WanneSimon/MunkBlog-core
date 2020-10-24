@@ -40,7 +40,7 @@ public class MRememberMeFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest) request;
 		String token = null;
 		Cookie cookie = this.getCookie(cookieName, req);
-		if( cookie != null) {
+		if( cookie != null && !"".equals(cookie.getValue())) {
 			token = cookie.getValue();
 		}
 		
@@ -64,7 +64,7 @@ public class MRememberMeFilter implements Filter{
 		
 		if(cookies != null) {
 			for (Cookie cookie : cookies) {
-				System.out.println(cookie.getName()+"\t"+cookie.getValue());
+//				System.out.println(cookie.getName()+"\t"+cookie.getValue());
 //				System.out.println();
 				if(cookie.getName().equals(name)) {
 					return cookie;

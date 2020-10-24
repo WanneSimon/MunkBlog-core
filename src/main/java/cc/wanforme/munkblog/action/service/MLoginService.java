@@ -46,7 +46,7 @@ public class MLoginService {
 		mtTokenService.generateAndSaveToken(user.getId(), request, response);
 		
 		// 清除并重新设置验证信息
-		userRoleAuthService.clearLoginAuthentications();
+		userRoleAuthService.clearLoginAuthentications(response);
 		UserRoleAuth roleAuth = userRoleAuthService.selectAuthenticationsByUser(user.getId());
 		userRoleAuthService.setAuthentications(roleAuth);
 		
@@ -55,6 +55,11 @@ public class MLoginService {
 		return ResMessage.newSuccessMessage("登录成功", userVo);
 	}
 	
-	
+	/** 注销*/
+	public ResMessage logout(HttpServletRequest request, HttpServletResponse response) {
+		userRoleAuthService.clearLoginAuthentications(response);
+		// 未清除数据库
+		return ResMessage.newSuccessMessage("退出成功", null);
+	}
 	
 }

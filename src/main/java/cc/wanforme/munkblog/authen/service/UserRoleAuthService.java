@@ -9,6 +9,9 @@ import java.util.TreeSet;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +28,7 @@ import cc.wanforme.munkblog.base.entity.UserRole;
 import cc.wanforme.munkblog.base.service.IRoleAuthService;
 import cc.wanforme.munkblog.base.service.IUserRoleService;
 import cc.wanforme.munkblog.base.service.IUserService;
+import cc.wanforme.munkblog.properties.TokenProperty;
 
 /** 查询用户的角色和对应的权限
  * @author wanne
@@ -41,6 +45,8 @@ public class UserRoleAuthService {
 	private IRoleAuthService authService;
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private TokenProperty tokenProperties;
 	
 	/** 获取用户的角色和权限（建议加入缓存）<br>
 	 * 注：没有查询 User 信息
@@ -110,8 +116,10 @@ public class UserRoleAuthService {
 	/**
 	 * 清除验证信息
 	 */
-	public void clearLoginAuthentications() {
+	public void clearLoginAuthentications(HttpServletResponse response) {
 		SecurityContextHolder.getContext().setAuthentication(null);
+		Cookie cookie = new Cookie(tokenProperties.getName(), null);
+		response.addCookie(cookie);
 	}
 	
 	/** 检查是否已经添加了验证信息

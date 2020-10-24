@@ -43,6 +43,12 @@ public class MloginController {
 		return this.login(vo, request, response);
 	}
 	
+	@RequestMapping("/logout")
+	@ResponseBody
+	public ResMessage logout(HttpServletRequest request, HttpServletResponse response) {
+		return loginService.logout(request, response);
+	}
+	
 	/** 验证测试*/
 	@RequestMapping("/authTest")
 	@PreAuthorize("hasRole('test')")

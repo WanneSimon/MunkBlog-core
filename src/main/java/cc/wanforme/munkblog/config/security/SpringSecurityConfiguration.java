@@ -38,13 +38,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http
-			.logout().logoutUrl("/logout")
+			.authorizeRequests()
+			.antMatchers("/**").permitAll();										
+//			.logout().logoutUrl("/logout")	
 	//				.invalidateHttpSession(true) // 让会话失效
-				.clearAuthentication(true).permitAll() // 或者清除授权（这样就不用手动调用了）
+//				    .clearAuthentication(true).permitAll() // 或者清除授权（这样就不用手动调用了）
 			// 允许所有请求通过，需要自定义参考下面的的配置和前面的注释说明
-			.and()
-				.authorizeRequests()
-				.antMatchers("/**").permitAll();
+//			.and()
 //			.and()
 //				.formLogin().loginPage("/login");
 //			.antMatchers("/static/**").permitAll()
