@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import cc.wanforme.munkblog.base.constant.FileDownloadEnum;
@@ -32,6 +33,7 @@ import cc.wanforme.munkblog.vo.efile.EFIleVo;
  * @author wanne
  * 2020年9月21日
  */
+@Service
 public class MFileService {
 	private static final Logger log = LoggerFactory.getLogger(MFileService.class);
 	

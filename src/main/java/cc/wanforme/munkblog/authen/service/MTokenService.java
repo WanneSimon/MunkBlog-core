@@ -3,7 +3,9 @@ package cc.wanforme.munkblog.authen.service;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +27,12 @@ public class MTokenService {
 	@Autowired
 	private TokenProperty tokenProperties;
 	
+	
 	/** 根据token查询对应的信息
 	 * @param token
 	 * @return
 	 */
-	public AuthToken selecToken(String token) {
+	public AuthToken selectToken(String token) {
 		return tokenBaseService.selecToken(token);
 	}
 	
@@ -38,7 +41,7 @@ public class MTokenService {
 	 * @param request
 	 * @return
 	 */
-	public AuthToken generateAndSaveToken(int userId, HttpServletRequest request) {
+	public AuthToken generateAndSaveToken(int userId, HttpServletRequest request, HttpServletResponse response) {
 		String token = UUID.randomUUID().toString();
 		LocalDateTime createTime = LocalDateTime.now();
 		LocalDateTime expiredTime = createTime.plusDays(tokenProperties.getExpireDays());
@@ -57,6 +60,11 @@ public class MTokenService {
 			authToken.setId(po.getId());
 			tokenBaseService.updateById(authToken);
 		}
+		
+		// 设置 cookie
+		Cookie cookie = new Cookie(tokenProperties.getName(), token);
+		cookie.setMaxAge(tokenProperties.getExpireDays() * 24 *3600);
+		response.addCookie(cookie);
 		
 		return authToken;
 	}

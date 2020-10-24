@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 public class TokenProperty {
 
 	/** token失效时间，默认一天*/
-	@Value("token.expireDays:1")
+	@Value("${token.expireDays:1}")
 	private int expireDays;
 	/** token名*/
-	@Value("token.name:mbhbosT")
-	private int name;	
+	@Value("${token.name:mbhbosT}")
+	private String name;	
 	
 	public int getExpireDays() {
 		return expireDays;
@@ -23,10 +23,10 @@ public class TokenProperty {
 	public void setExpireDays(int expireDays) {
 		this.expireDays = expireDays;
 	}
-	public int getName() {
+	public String getName() {
 		return name;
 	}
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 }

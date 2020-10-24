@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileProperty {
 
-	@Value("files.uploadDir:file/uploadDir")
+	@Value("${files.uploadDir:file/uploadDir}")
 	private String uploadDir;
-	@Value("files.save:file/save")
+	@Value("${files.save:file/save}")
 	private String saveDir;
-	@Value("files.renameTryTime:10")
+	@Value("${files.renameTryTime:10}")
 	private int renameTryTime;
 
 	

@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+	/** 用户名查询*/
+	User selectByUsername(String username);
+	
 }

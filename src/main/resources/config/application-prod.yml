@@ -70,5 +70,5 @@ files:
 ######### token相关 #############
 token:
    expireDays: 1 # token失效时间，默认一天
-   name: mbhbosT# token名，默认 mbhbosT
+   name: mbhbosT # token名，默认 mbhbosT
    

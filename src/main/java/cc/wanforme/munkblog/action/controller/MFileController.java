@@ -21,12 +21,12 @@ import cc.wanforme.munkblog.vo.ResMessage;
 public class MFileController {
 
 	@Autowired
-	private MFileService mfileService;
+	private MFileService mFileService;
 	
 	@RequestMapping("/upload")
 	@ResponseBody
 	public ResMessage uploadFile(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
-		return mfileService.uploadFile(file, request, response);
+		return mFileService.uploadFile(file, request, response);
 	}
 	
 	

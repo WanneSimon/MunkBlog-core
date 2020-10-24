@@ -8,6 +8,7 @@ public enum ResCode {
 	
 	SUCCESS("00", "处理成功"),
 	FAIL("01", "处理失败"),
+	PREMISSION_DENY("02", "无权访问"),
 	;
 	
 	private String code;
