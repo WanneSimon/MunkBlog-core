@@ -49,6 +49,12 @@ public class MloginController {
 		return loginService.logout(request, response);
 	}
 	
+	@RequestMapping("/auth")
+	@ResponseBody
+	public ResMessage currentPermession() {
+		return loginService.currentPermession();
+	}
+	
 	/** 验证测试*/
 	@RequestMapping("/authTest")
 	@PreAuthorize("hasRole('test')")
