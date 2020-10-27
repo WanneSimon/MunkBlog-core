@@ -64,6 +64,7 @@ public class MTokenService {
 		// 设置 cookie
 		Cookie cookie = new Cookie(tokenProperties.getName(), token);
 		cookie.setMaxAge(tokenProperties.getExpireDays() * 24 *3600);
+		cookie.setPath("/");
 		response.addCookie(cookie);
 		
 		return authToken;

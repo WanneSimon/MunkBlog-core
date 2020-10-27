@@ -51,8 +51,8 @@ public class MloginController {
 	
 	@RequestMapping("/auth")
 	@ResponseBody
-	public ResMessage currentPermession() {
-		return loginService.currentPermession();
+	public ResMessage currentPermession(HttpServletRequest request) {
+		return loginService.currentPermession(request);
 	}
 	
 	/** 验证测试*/
