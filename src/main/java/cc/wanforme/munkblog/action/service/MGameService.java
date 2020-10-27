@@ -21,6 +21,7 @@ import cc.wanforme.munkblog.base.constant.ObjectTypeEnum;
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.Game;
 import cc.wanforme.munkblog.base.entity.ImageFile;
+import cc.wanforme.munkblog.base.service.IEfileService;
 import cc.wanforme.munkblog.base.service.IGameService;
 import cc.wanforme.munkblog.base.service.IImageFileService;
 import cc.wanforme.munkblog.util.MunkBeanUtils;
@@ -42,6 +43,9 @@ public class MGameService {
 	
 	@Autowired
 	private IImageFileService imageFileService;
+	
+	@Autowired
+	private IEfileService efileService;
 	
 	public ResMessage searchGame(GameSearchVo searchVo) {
 		PageInfo<Game> data = gameService.selectGames(searchVo);
@@ -154,7 +158,7 @@ public class MGameService {
 				ImageFile cover = new ImageFile();
 				cover.setObjectId(gameVo.getId());
 				cover.setFileId(coverVo.getFileId());
-				cover.setType(ObjectTypeEnum.BOOK.getCode());
+				cover.setType(ObjectTypeEnum.GAME.getCode());
 				cover.setValid(ValidEnum.VALID.getCode());
 				
 				imageFileService.save(cover);
@@ -180,6 +184,8 @@ public class MGameService {
 				ImageFile cover = opt.get();
 				cover.setFileId(coverVo.getFileId());
 				imageFileService.updateById(cover);
+				
+				efileService.updateObjectType(coverVo.getFileId(), ObjectTypeEnum.BOOK.getCode());
 				
 				BeanUtils.copyProperties(cover, coverVo);
 				resMsg.append("封面更新成功");

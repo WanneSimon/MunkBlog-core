@@ -22,6 +22,7 @@ import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.Book;
 import cc.wanforme.munkblog.base.entity.ImageFile;
 import cc.wanforme.munkblog.base.service.IBookService;
+import cc.wanforme.munkblog.base.service.IEfileService;
 import cc.wanforme.munkblog.base.service.IImageFileService;
 import cc.wanforme.munkblog.util.MunkBeanUtils;
 import cc.wanforme.munkblog.vo.ResMessage;
@@ -42,6 +43,9 @@ public class MBookService {
 	
 	@Autowired
 	private IImageFileService imageFileService;
+	
+	@Autowired
+	private IEfileService efileService;
 	
 	/** 搜索*/
 	public ResMessage searchBook(BookSearchVo searchVo) {
@@ -186,6 +190,8 @@ public class MBookService {
 				ImageFile cover = opt.get();
 				cover.setFileId(coverVo.getFileId());
 				imageFileService.updateById(cover);
+
+				efileService.updateObjectType(coverVo.getFileId(), ObjectTypeEnum.BOOK.getCode());
 				
 				BeanUtils.copyProperties(cover, coverVo);
 				resMsg.append("封面更新成功");

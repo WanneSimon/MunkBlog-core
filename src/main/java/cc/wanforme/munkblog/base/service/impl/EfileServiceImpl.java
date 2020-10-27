@@ -32,4 +32,9 @@ public class EfileServiceImpl extends ServiceImpl<EfileMapper, Efile> implements
 		return this.baseMapper.selectByObjectAndName(objectId, fileName);
 	}
 
+	@Override
+	public void updateObjectType(int id, String objectType) {
+		this.baseMapper.updateObjectType(id, objectType);
+	}
+
 }

@@ -21,4 +21,5 @@ public interface EfileMapper extends BaseMapper<Efile> {
 
 	Efile selectByObjectAndName(@Param("objectId") Integer objectId,@Param("name") String name);
 
+	void updateObjectType(@Param("id")int id, @Param("objectType") String objectType);
 }

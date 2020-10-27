@@ -24,4 +24,7 @@ public interface IEfileService extends IService<Efile> {
 	 * @param fileName 文件名(非硬盘上的文件明)
 	 */
 	Efile selectByObjectAndName(Integer objectId, String fileName); 
+	
+	/** 更新所属对象类型*/
+	void updateObjectType(int id, String objectType);
 }

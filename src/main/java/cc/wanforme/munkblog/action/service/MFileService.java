@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 import cc.wanforme.munkblog.base.constant.FileDownloadEnum;
@@ -25,6 +26,7 @@ import cc.wanforme.munkblog.base.service.IEfileService;
 import cc.wanforme.munkblog.base.service.IImageFileService;
 import cc.wanforme.munkblog.properties.FileProperty;
 import cc.wanforme.munkblog.util.FileUtil;
+import cc.wanforme.munkblog.util.MunkBeanUtils;
 import cc.wanforme.munkblog.util.PathResource;
 import cc.wanforme.munkblog.vo.ResMessage;
 import cc.wanforme.munkblog.vo.efile.EFIleVo;
@@ -116,6 +118,23 @@ public class MFileService {
 			this.writeError("文件不存在！", response);
 		}
 		
+	}
+	
+	/** 更新文件对象（不允许更新 创建时间和文件的实际名称 filename）
+	 * @param vo
+	 */
+	public ResMessage updateFile(EFIleVo vo){
+		Assert.notNull(vo, "非法操作，没有信息！");
+		Assert.notNull(vo.getId(), "请确定具体文件！");
+		Assert.hasText(vo.getFileName(), "文件磁盘物理名不可修改！");
+		
+		vo.setCreateTime(null);
+		Efile po = new Efile();
+		MunkBeanUtils.copyNotNullProperties(vo, po);
+		po.setUpdateTime(LocalDateTime.now());
+		
+		efileService.updateById(po);
+		return ResMessage.newSuccessMessage("更新成功");
 	}
 	
 	/**

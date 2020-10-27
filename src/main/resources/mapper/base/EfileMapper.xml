@@ -17,4 +17,7 @@
 		<include refid="ID_DESC" />
 	</select>
 	
+	<update id="updateObjectType" >
+		update efile set type = #{objectType} where id = #{id}
+	</update>
 </mapper>
