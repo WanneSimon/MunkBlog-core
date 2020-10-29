@@ -109,6 +109,10 @@ public class FileUtil {
 	
 	/** 上传文件*/
 	public static void saveFile(MultipartFile file, File saveFile) throws IOException {
+		if(!saveFile.getParentFile().exists()) {
+			saveFile.getParentFile().mkdirs();
+		}
+		
 		try (InputStream is = file.getInputStream();
 			 FileOutputStream fos = new FileOutputStream(saveFile);) {
 			byte[] bs = new byte[10240];

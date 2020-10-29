@@ -38,9 +38,9 @@ public class MFileController {
 		return mFileService.updateFile(vo);
 	}
 	
-	@RequestMapping("/update/{id}")
+	@RequestMapping("/get/{id}")
 	@ResponseBody
-	public void updateFile(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
+	public void getFile(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
 		mFileService.getFile(id, request, response);
 	}
 }

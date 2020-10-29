@@ -110,7 +110,8 @@ public class MBookService {
 		}
 		
 		BeanUtils.copyProperties(book, bookVo);
-		return ResMessage.newSuccessMessage("添加成功", book);
+		bookVo.setCover(coverVo);
+		return ResMessage.newSuccessMessage("添加成功", bookVo);
 	}
 	
 	/** 更新*/

@@ -188,6 +188,7 @@ public class MGameService {
 				efileService.updateObjectType(coverVo.getFileId(), ObjectTypeEnum.BOOK.getCode());
 				
 				BeanUtils.copyProperties(cover, coverVo);
+				gameVo.setCover(coverVo);
 				resMsg.append("封面更新成功");
 			}
 		}
