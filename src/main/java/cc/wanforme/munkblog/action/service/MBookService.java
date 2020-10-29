@@ -158,7 +158,7 @@ public class MBookService {
 			ImageFile coverVo = bookVo.getCover();
 			
 			List<ImageFile> imageFiles = imageFileService.selectAllByObjectId(bookVo.getId());
-			if(imageFiles == null) {
+			if(imageFiles == null || imageFiles.isEmpty()) {
 				// 保存
 				Assert.notNull(coverVo.getFileId(), "没有文件id");
 				

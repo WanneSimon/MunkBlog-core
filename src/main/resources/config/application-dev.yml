@@ -36,9 +36,12 @@ spring:
        default:
           # mysql驱动高版本报 时区不识别的错时，一定给加上末尾的参数 serverTimezone=UTC(世界同一时间) 或 serverTimezone=GMT%2B8(东8区)
           # 低版本驱动不存在时区问题
-          url: jdbc:mysql://localhost:3306/MunkBlog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true&serverTimezone=GMT%2B8
-          username: root
-          password: wansmmecc
+          #url: jdbc:mysql://localhost:3306/MunkBlog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true&serverTimezone=GMT%2B8
+          #username: root
+          #password: wansmmecc
+          #driver-class-name: com.mysql.jdbc.Driver          url: jdbc:mysql://www.wanforme.cc:3306/munkblog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true&serverTimezone=GMT%2B8
+          username: wanne
+          password: wanforME@7754
           driver-class-name: com.mysql.jdbc.Driver
 # redis 单数据源配置
   redis:

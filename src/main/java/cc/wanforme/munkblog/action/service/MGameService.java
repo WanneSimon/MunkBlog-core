@@ -151,7 +151,7 @@ public class MGameService {
 			ImageFile coverVo = gameVo.getCover();
 			
 			List<ImageFile> imageFiles = imageFileService.selectAllByObjectId(gameVo.getId());
-			if(imageFiles == null) {
+			if(imageFiles == null || imageFiles.isEmpty()) {
 				// 保存
 				Assert.notNull(coverVo.getFileId(), "没有文件id");
 				
