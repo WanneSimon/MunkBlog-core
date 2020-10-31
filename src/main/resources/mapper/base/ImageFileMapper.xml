@@ -24,7 +24,7 @@
 		  <include refid="ID_ASC" />
 	</select>
 	
-	<select id="selectByObjectId" 
+	<select id="selectAllByObjectId" 
 		resultType="cc.wanforme.munkblog.base.entity.ImageFile">
 		select * from image_file 
 		  where valid = #{valid} 
@@ -43,13 +43,13 @@
 	
 	<select id="selectObjectImageVos" resultType="cc.wanforme.munkblog.vo.efile.ImageVo">
 	  select <include refid="SELECT_IMAGEVO" />
-	  from  ( select * from image_file where object_id=#{objectId} ) a, efile b 
+	  from  ( select * from image_file where type=#{type} and object_id=#{objectId} ) a, efile b 
 	  where a.file_id = b.id 
 	</select>
 	
 	<select id="selectImageVoByObjectAndName" resultType="cc.wanforme.munkblog.vo.efile.ImageVo">
 	  select <include refid="SELECT_IMAGEVO" />
-	  from  ( select * from image_file where object_id=#{objectId} ) a, efile b 
+	  from  ( select * from image_file where type=#{type} and object_id=#{objectId} ) a, efile b 
 	  where a.file_id = b.id  and b.name=#{name}
 	</select>
 	

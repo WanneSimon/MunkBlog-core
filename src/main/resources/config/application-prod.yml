@@ -7,8 +7,17 @@ logging:
         ROOT: info 
         cc.wanforme.coorush: info
 
+server:
+  max-http-header-size: 4048576
+  tomcat:
+    max-http-post-size: 100MB  #请求参数长度
+    
 # 数据源, alibaba druid连接池
 spring:
+  servlet:
+    mumultipart:
+      max-file-size: 100MB # 单个文件上传大小
+      max-request-size: 1000MB # 总上传大小
   aop:
     proxy-target-class: true    auto: true  datasource:#    type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -37,7 +46,8 @@ spring:
           url: jdbc:mysql://localhost:3306/MunkBlog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true
           username: root
           password: passswordpassword
-          driver-class-name: com.mysql.jdbc.Driver
+          #driver-class-name: com.mysql.jdbc.Driver
+          driver-class-name: com.mysql.cj.jdbc.Driver
 #       db2:
 #          url: jdbc:oracle:thin:@192.168.136.222:ORCL
 #          username: sa

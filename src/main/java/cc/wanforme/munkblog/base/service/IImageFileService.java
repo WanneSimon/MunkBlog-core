@@ -1,5 +1,6 @@
 package cc.wanforme.munkblog.base.service;
 
+import cc.wanforme.munkblog.base.constant.ObjectTypeEnum;
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.ImageFile;
 import cc.wanforme.munkblog.vo.efile.ImageVo;
@@ -23,17 +24,17 @@ public interface IImageFileService extends IService<ImageFile> {
 	 * @param objectId
 	 * @return
 	 */
-	List<ImageFile> selectByObjectId(ValidEnum valid, int objectId);
+	List<ImageFile> selectAllByObjectId(ValidEnum valid, int objectId);
 	
 	/** 查询对象所有的图片文件信息*/
-	List<ImageFile> selectAllByObjectId( int objectId);
+	List<ImageFile> selectByObjectId( int objectId, ObjectTypeEnum type);
 	
-	List<ImageFile> selectByTypeWithObjectId(ValidEnum valid, int objectId, String type);
+	List<ImageFile> selectByTypeWithObjectId(ValidEnum valid, int objectId, ObjectTypeEnum type);
 
 	/** 查询对象的所有 imageVo*/
-	List<ImageVo> selectObjectImageVos( int objectId);
+	List<ImageVo> selectObjectImageVos( int objectId, ObjectTypeEnum type);
 
 	/** 查询对象某一个 imageVO*/
-	ImageVo selectImageVoByObjectAndName( int objectId, String name);
+	ImageVo selectImageVoByObjectAndName( int objectId, ObjectTypeEnum type , String name);
 	
 }

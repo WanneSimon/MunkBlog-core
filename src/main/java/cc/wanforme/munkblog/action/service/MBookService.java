@@ -58,7 +58,8 @@ public class MBookService {
 			BookVo bookVo = new BookVo();
 			BeanUtils.copyProperties(e, bookVo);
 			
-			List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, e.getId());
+//			List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, e.getId());
+			List<ImageFile> images = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, e.getId(), ObjectTypeEnum.BOOK);
 			if( images!=null && !images.isEmpty()) {
 				bookVo.setCover(images.get(0));
 			}
@@ -157,7 +158,8 @@ public class MBookService {
 		if( bookVo.getCover() != null ) {
 			ImageFile coverVo = bookVo.getCover();
 			
-			List<ImageFile> imageFiles = imageFileService.selectAllByObjectId(bookVo.getId());
+//			List<ImageFile> imageFiles = imageFileService.selectAllByObjectId(bookVo.getId());
+			List<ImageFile> imageFiles = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, bookVo.getId(), ObjectTypeEnum.BOOK);
 			if(imageFiles == null || imageFiles.isEmpty()) {
 				// 保存
 				Assert.notNull(coverVo.getFileId(), "没有文件id");
@@ -209,7 +211,8 @@ public class MBookService {
 		book.setValid(ValidEnum.INVALID.getCode());
 		bookService.updateById(book);
 		
-		List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, bookId);
+//		List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, bookId);
+		List<ImageFile> images = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, bookId, ObjectTypeEnum.BOOK);
 		if(images != null) {
 			images.forEach( e -> {
 				e.setValid(ValidEnum.INVALID.getCode());
@@ -226,6 +229,11 @@ public class MBookService {
 		
 		BookVo vo = new BookVo();
 		BeanUtils.copyProperties(po, vo);
+		
+		List<ImageFile> images = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, po.getId(), ObjectTypeEnum.BOOK);
+		if( images!=null && !images.isEmpty()) {
+			vo.setCover(images.get(0));
+		}
 		
 		return ResMessage.newSuccessMessage("获取成功", vo);
 	}

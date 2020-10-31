@@ -7,8 +7,25 @@ logging:
         ROOT: info 
         cc.wanforme.coorush: info
 
+server:
+  max-http-header-size: 4048576
+  tomcat:
+    max-http-post-size: 100MB  #请求参数长度
+
 # 数据源, alibaba druid连接池
 spring:
+  # SB 1.5x
+  #http:
+    #mumultipart:
+      #max-file-size: 100MB # 单个文件上传大小
+      #max-request-size: 1000MB # 总上传大小
+  # SB 2.0x
+  servlet :
+    multipart:
+      enabled: true
+      max-file-size: 100MB # 单个文件上传大小
+      max-request-size: 1000MB # 总上传大小
+      
   aop:
     proxy-target-class: true    auto: true  datasource:#    type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -36,13 +53,14 @@ spring:
        default:
           # mysql驱动高版本报 时区不识别的错时，一定给加上末尾的参数 serverTimezone=UTC(世界同一时间) 或 serverTimezone=GMT%2B8(东8区)
           # 低版本驱动不存在时区问题
-          #url: jdbc:mysql://localhost:3306/MunkBlog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true&serverTimezone=GMT%2B8
-          #username: root
-          #password: wansmmecc
-          #driver-class-name: com.mysql.jdbc.Driver          url: jdbc:mysql://www.wanforme.cc:3306/munkblog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true&serverTimezone=GMT%2B8
-          username: wanne
-          password: wanforME@7754
-          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/MunkBlog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true&serverTimezone=GMT%2B8
+          username: root
+          password: wansmmecc
+          #driver-class-name: com.mysql.jdbc.Driver
+          driver-class-name: com.mysql.cj.jdbc.Driver          #url: jdbc:mysql://www.wanforme.cc:3306/munkblog?useUnicode=true&characterEncoding=UTF-8&atuoReconnect=true&serverTimezone=GMT%2B8
+          #username: wanne
+          #password: wanforME@7754
+          #driver-class-name: com.mysql.jdbc.Driver          #driver-class-name: com.mysql.cj.jdbc.Driver
 # redis 单数据源配置
   redis:
     database: 0

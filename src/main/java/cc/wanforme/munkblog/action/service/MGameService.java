@@ -55,18 +55,24 @@ public class MGameService {
 		List<GameVo> gameVos = new ArrayList<>(games.size());
 		games.forEach( e -> {
 			GameVo gameVo = new GameVo();
-			BeanUtils.copyProperties(e, gameVos);
+			BeanUtils.copyProperties(e, gameVo);
 			
-			List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, e.getId());
+			if(e.getId() == 24) {
+				System.out.println("pause");
+			}
+			
+//			List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, e.getId());
+			List<ImageFile> images = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, e.getId(), ObjectTypeEnum.GAME);
 			if( images!=null && !images.isEmpty()) {
 				gameVo.setCover(images.get(0));
 			}
+			gameVos.add(gameVo);
 		});
 		
 		
 		PageInfo<GameVo> resData = new PageInfo<GameVo>(gameVos);
 		BeanUtils.copyProperties(data, resData, "list");
-		return ResMessage.newSuccessMessage(data);
+		return ResMessage.newSuccessMessage(resData);
 	}
 
 	
@@ -150,7 +156,8 @@ public class MGameService {
 		if( gameVo.getCover() != null ) {
 			ImageFile coverVo = gameVo.getCover();
 			
-			List<ImageFile> imageFiles = imageFileService.selectAllByObjectId(gameVo.getId());
+//			List<ImageFile> imageFiles = imageFileService.selectAllByObjectId(gameVo.getId());
+			List<ImageFile> imageFiles = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, gameVo.getId(), ObjectTypeEnum.GAME);
 			if(imageFiles == null || imageFiles.isEmpty()) {
 				// 保存
 				Assert.notNull(coverVo.getFileId(), "没有文件id");
@@ -203,7 +210,8 @@ public class MGameService {
 		game.setValid(ValidEnum.INVALID.getCode());
 		gameService.updateById(game);
 		
-		List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, gameId);
+//		List<ImageFile> images = imageFileService.selectByObjectId(ValidEnum.VALID, gameId);
+		List<ImageFile> images = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, gameId, ObjectTypeEnum.GAME);
 		if(images != null) {
 			images.forEach( e -> {
 				e.setValid(ValidEnum.INVALID.getCode());
@@ -221,6 +229,11 @@ public class MGameService {
 		
 		GameVo vo = new GameVo();
 		BeanUtils.copyProperties(po, vo);
+		
+		List<ImageFile> images = imageFileService.selectByTypeWithObjectId(ValidEnum.VALID, po.getId(), ObjectTypeEnum.BOOK);
+		if( images!=null && !images.isEmpty()) {
+			vo.setCover(images.get(0));
+		}
 		
 		return ResMessage.newSuccessMessage("获取成功", vo);
 	}

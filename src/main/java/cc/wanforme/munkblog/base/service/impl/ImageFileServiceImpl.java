@@ -1,5 +1,6 @@
 package cc.wanforme.munkblog.base.service.impl;
 
+import cc.wanforme.munkblog.base.constant.ObjectTypeEnum;
 import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.ImageFile;
 import cc.wanforme.munkblog.base.mapper.ImageFileMapper;
@@ -24,28 +25,28 @@ import org.springframework.stereotype.Service;
 public class ImageFileServiceImpl extends ServiceImpl<ImageFileMapper, ImageFile> implements IImageFileService {
 
 	@Override
-	public List<ImageFile> selectByObjectId(ValidEnum valid, int objectId) {
-		return this.baseMapper.selectByObjectId(valid.getCode(), objectId);
+	public List<ImageFile> selectAllByObjectId(ValidEnum valid, int objectId) {
+		return this.baseMapper.selectAllByObjectId(valid.getCode(), objectId);
 	}
 
 	@Override
-	public List<ImageFile> selectAllByObjectId(int objectId) {
-		return this.baseMapper.selectByObjectId(null, objectId);
+	public List<ImageFile> selectByObjectId(int objectId, ObjectTypeEnum type) {
+		return this.baseMapper.selectByTypeWithObjectId(null, objectId, type.getCode());
 	}
 
 	@Override
-	public List<ImageFile> selectByTypeWithObjectId(ValidEnum valid, int objectId, String type) {
-		return this.baseMapper.selectByTypeWithObjectId(valid.getCode(), objectId, type);
+	public List<ImageFile> selectByTypeWithObjectId(ValidEnum valid, int objectId, ObjectTypeEnum type) {
+		return this.baseMapper.selectByTypeWithObjectId(valid.getCode(), objectId, type.getCode());
 	}
 
 	@Override
-	public List<ImageVo> selectObjectImageVos(int objectId) {
-		return this.baseMapper.selectObjectImageVos(objectId);
+	public List<ImageVo> selectObjectImageVos(int objectId, ObjectTypeEnum type) {
+		return this.baseMapper.selectObjectImageVos(objectId, type.getCode());
 	}
 
 	@Override
-	public ImageVo selectImageVoByObjectAndName(int objectId, String name) {
-		return this.selectImageVoByObjectAndName(objectId, name);
+	public ImageVo selectImageVoByObjectAndName(int objectId, ObjectTypeEnum type, String name) {
+		return this.baseMapper.selectImageVoByObjectAndName(objectId, type.getCode(), name);
 	}
 
 }
