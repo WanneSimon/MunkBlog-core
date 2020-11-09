@@ -10,7 +10,8 @@ logging:
 server:
   max-http-header-size: 4048576
   tomcat:
-    max-http-post-size: 100MB  #请求参数长度
+    #max-http-post-size: 100MB  #请求参数长度
+    max-http-form-post-size: 100MB  #请求参数长度
 
 # 数据源, alibaba druid连接池
 spring:
