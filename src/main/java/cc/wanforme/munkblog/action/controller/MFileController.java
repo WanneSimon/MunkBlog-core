@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +28,14 @@ public class MFileController {
 	private MFileService mFileService;
 	
 	@RequestMapping("/upload")
+	@PreAuthorize("hasAuthority('file_upload')")
 	@ResponseBody
 	public ResMessage uploadFile(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
 		return mFileService.uploadFile(file, request, response);
 	}
 	
 	@RequestMapping("/update")
+	@PreAuthorize("hasAuthority('file_update')")
 	@ResponseBody
 	public ResMessage updateFile(@RequestBody EFIleVo vo) {
 		return mFileService.updateFile(vo);

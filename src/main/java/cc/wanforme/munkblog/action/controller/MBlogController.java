@@ -1,6 +1,7 @@
 package cc.wanforme.munkblog.action.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,22 +37,24 @@ public class MBlogController {
 	}
 	
 	@PostMapping("/add")
+	@PreAuthorize("hasAuthority('blog_add')")
 	@ResponseBody
 	public ResMessage addBlog(@RequestBody BlogVo blogVo) {
 		return blogMunkService.addBlog(blogVo);
 	}
 	
 	@PostMapping("/update")
+	@PreAuthorize("hasAuthority('blog_update')")
 	@ResponseBody
 	public ResMessage updateBlog(@RequestBody BlogVo blogVo) {
 		return blogMunkService.updateBlog(blogVo);
 	}
 
 	@PostMapping("/delete")
+	@PreAuthorize("hasAuthority('blog_update')")
 	@ResponseBody
 	public ResMessage deleteBlog(@RequestBody int blogId) {
 		return blogMunkService.deleteBlog(blogId);
 	}
-	
 	
 }

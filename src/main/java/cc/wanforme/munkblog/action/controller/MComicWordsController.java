@@ -1,6 +1,7 @@
 package cc.wanforme.munkblog.action.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class MComicWordsController {
 	}
 	
 	@RequestMapping("/add")
+	@PreAuthorize("hasAuthority('CW_add')")
 	@ResponseBody
 	public ResMessage addComicWords(@RequestBody ComicWordsVo comicWordsVo) {
 		return mComicWordsService.addComicWords(comicWordsVo);
@@ -41,6 +43,7 @@ public class MComicWordsController {
 	}
 	
 	@RequestMapping("/update")
+	@PreAuthorize("hasAuthority('CW_update')")
 	@ResponseBody
 	public ResMessage updateComicWords(@RequestBody ComicWordsVo vo) {
 		return mComicWordsService.updateComicWords(vo);

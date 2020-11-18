@@ -1,6 +1,7 @@
 package cc.wanforme.munkblog.action.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class MDailyLogController {
 	}
 	
 	@RequestMapping("/add")
+	@PreAuthorize("hasAuthority('dailyLog_add')")
 	@ResponseBody
 	public ResMessage addDailyLog(@RequestBody DailyLogVo comicWordsVo) {
 		return dailyLogService.addDailyLog(comicWordsVo);
@@ -41,6 +43,7 @@ public class MDailyLogController {
 	}
 	
 	@RequestMapping("/update")
+	@PreAuthorize("hasAuthority('dailyLog_update')")
 	@ResponseBody
 	public ResMessage updateDailyLog(@RequestBody DailyLogVo vo) {
 		return dailyLogService.updateDailyLog(vo);

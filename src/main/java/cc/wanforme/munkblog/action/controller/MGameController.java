@@ -1,6 +1,7 @@
 package cc.wanforme.munkblog.action.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public class MGameController {
 	}
 	
 	@PostMapping("/add")
+	@PreAuthorize("hasAuthority('game_add')")
 	@ResponseBody
 	public ResMessage addGame(@RequestBody GameVo bookVo) {
 		return gameService.addGame(bookVo);
@@ -42,12 +44,14 @@ public class MGameController {
 	}
 	
 	@PostMapping("/update")
+	@PreAuthorize("hasAuthority('game_update')")
 	@ResponseBody
 	public ResMessage updateGame(@RequestBody GameVo bookVo) {
 		return gameService.updateGame(bookVo);
 	}
 
 	@PostMapping("/delete")
+	@PreAuthorize("hasAuthority('game_update')")
 	@ResponseBody
 	public ResMessage deleteGame(@RequestBody int bookId) {
 		return gameService.deleteGame(bookId);

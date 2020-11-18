@@ -1,6 +1,7 @@
 package cc.wanforme.munkblog.action.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public class MBookController {
 	}
 	
 	@PostMapping("/add")
+	@PreAuthorize("hasAuthority('book_add')")
 	@ResponseBody
 	public ResMessage addBook(@RequestBody BookVo bookVo) {
 		return bookService.addBook(bookVo);
@@ -42,12 +44,14 @@ public class MBookController {
 	}
 	
 	@PostMapping("/update")
+	@PreAuthorize("hasAuthority('book_update')")
 	@ResponseBody
 	public ResMessage updateBook(@RequestBody BookVo bookVo) {
 		return bookService.updateBook(bookVo);
 	}
 
 	@PostMapping("/delete")
+	@PreAuthorize("hasAuthority('book_update')")
 	@ResponseBody
 	public ResMessage deleteBook(@RequestBody int bookId) {
 		return bookService.deleteBook(bookId);
