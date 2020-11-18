@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author wanne
  * @since 2020-09-20
  */
-@ApiModel(value="BookmarkFolder对象", description="书签父子关系文件夹")
+@ApiModel(value="BookmarkFolder对象", description="书签文件夹")
 public class BookmarkFolder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,54 +23,54 @@ public class BookmarkFolder implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "父书签文件夹")
-    private Integer parentId;
+    @ApiModelProperty(value = "书签文件夹")
+    private String folder;
 
-    @ApiModelProperty(value = "字书签文件夹")
-    private Integer childId;
+    @ApiModelProperty(value = "书签")
+    private Integer bookmarkId;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
 
     public Integer getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getParentId() {
-        return parentId;
-    }
+	public String getFolder() {
+		return folder;
+	}
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
+	public void setFolder(String folder) {
+		this.folder = folder;
+	}
 
-    public Integer getChildId() {
-        return childId;
-    }
+	public Integer getBookmarkId() {
+		return bookmarkId;
+	}
 
-    public void setChildId(Integer childId) {
-        this.childId = childId;
-    }
+	public void setBookmarkId(Integer bookmarkId) {
+		this.bookmarkId = bookmarkId;
+	}
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "BookmarkFolder{" +
         "id=" + id +
-        ", parentId=" + parentId +
-        ", childId=" + childId +
+        ", folder=" + folder +
+        ", bookmarkId=" + bookmarkId +
         ", createTime=" + createTime +
         "}";
     }
