@@ -96,6 +96,7 @@ CREATE TABLE `bookmark_folder`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `folder` varchar(100) DEFAULT NULL COMMENT '书签文件夹',
   `bookmark_id` int(0) DEFAULT NULL COMMENT '书签',
+  `valid` varchar(2) DEFAULT '1' COMMENT '1-有效,0无效',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `bookmark_folder`(`folder`) USING BTREE COMMENT '书签文件夹索引'

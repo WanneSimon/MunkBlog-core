@@ -29,6 +29,9 @@ public class BookmarkFolder implements Serializable {
     @ApiModelProperty(value = "书签")
     private Integer bookmarkId;
 
+    @ApiModelProperty(value = "1-有效,0无效")
+    private String valid;
+    
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
@@ -56,7 +59,15 @@ public class BookmarkFolder implements Serializable {
 	public void setBookmarkId(Integer bookmarkId) {
 		this.bookmarkId = bookmarkId;
 	}
-
+	
+	public String getValid() {
+		return valid;
+	}
+	
+	public void setValid(String valid) {
+		this.valid = valid;
+	}
+	
 	public LocalDateTime getCreateTime() {
 		return createTime;
 	}

@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.wanforme.munkblog.base.mapper.BookmarkFolderMapper">
 
+	<sql id="ID_DESC">
+		order by id desc
+	</sql>
+
+	<sql id="ID_ASC">
+		order by id asc
+	</sql>
+	
+	<select id="searchBookmarkFolders" parameterType="cc.wanforme.munkblog.vo.bookmark.BookmarkFolderSearchVo"
+		resultType="cc.wanforme.munkblog.base.entity.BookmarkFolder">
+		select * from bookmark_folder 
+		<if test="folder!=null and folder!=''"> where folder like concat('%', #{folder},'%')</if>
+		<include refid="ID_ASC" />
+	</select>
+
+	<select id="selectBookmarkFolders" parameterType="cc.wanforme.munkblog.vo.bookmark.BookmarkFolderSearchVo"
+		resultType="cc.wanforme.munkblog.base.entity.BookmarkFolder">
+		select * from bookmark_folder  where folder = #{folder}
+		<include refid="ID_ASC" />
+	</select>
+
+	<select id="selectAllValidFolders" 
+		resultType="string">
+		select distinct folder from bookmark_folder 
+		<include refid="ID_ASC" />
+	</select>
+
 </mapper>
