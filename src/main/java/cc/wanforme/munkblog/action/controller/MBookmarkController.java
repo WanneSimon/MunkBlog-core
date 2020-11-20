@@ -28,7 +28,7 @@ public class MBookmarkController {
 	private MBookmarkService bookmarkService;
 	
 	/** 获取书签文件夹*/
-	@PostMapping("/add")
+	@PostMapping("/folders")
 	@ResponseBody
 	public PageInfo<String> selectAllValidFolders(SearchVo searchVo){
 		return bookmarkService.selectAllValidFolders(searchVo);
@@ -57,8 +57,8 @@ public class MBookmarkController {
 	
 	@PostMapping("/updateFolder")
 	@ResponseBody
-	public ResMessage updateBookmark(List<BookmarkVo> vos) {
-		return bookmarkService.updateBookmark(vos);
+	public ResMessage updateBookmarkFolders(List<BookmarkVo> vos) {
+		return bookmarkService.updateBookmarkFolders(vos);
 	}
 	
 }

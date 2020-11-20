@@ -1,15 +1,19 @@
 package cc.wanforme.munkblog.action.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import com.github.pagehelper.PageInfo;
 
+import cc.wanforme.munkblog.base.constant.ValidEnum;
 import cc.wanforme.munkblog.base.entity.Bookmark;
 import cc.wanforme.munkblog.base.entity.BookmarkFolder;
 import cc.wanforme.munkblog.base.service.IBookmarkFolderService;
@@ -65,6 +69,7 @@ public class MBookmarkService {
 	}
 	
 	/** 更新书签*/
+	@Transactional(rollbackFor = Exception.class)
 	public ResMessage updateBookmark(BookmarkVo vo) {
 		Assert.notNull(vo, "没有数据");
 		Assert.notNull(vo.getId(), "缺少更新Id");
@@ -94,23 +99,28 @@ public class MBookmarkService {
 	/** 更新书签文件夹<br>
 	 * 根据 BookmarkFolder 的id更新的 文件夹名字和书签的id <br>
 	 * 也就是说，可以更新 书签和书签所属文件夹*/
-	public ResMessage updateBookmark(List<BookmarkVo> vos){
+	@Transactional(rollbackFor = Exception.class)
+	public ResMessage updateBookmarkFolders(List<BookmarkVo> vos){
 		if(vos == null || vos.isEmpty()) {
 			return ResMessage.newFailMessage("没有数据");
 		}
 		
 		boolean anyNull = vos.parallelStream()
-			.anyMatch( e -> e.getId()==null);
+			.anyMatch( e -> e.getFolderId()==null);
 		if(anyNull) {
 			return ResMessage.newFailMessage("包含不确定的更新对象");
 		}
 		
-		// 更新书签
+		// 更新书签文件夹
 		int count = 0;
 		for (BookmarkVo vo : vos) {
 			BookmarkFolder bf = new BookmarkFolder();
 			bf.setId(vo.getFolderId());
-			bf.setFolder(vo.getFolder());
+			if(StringUtils.isBlank(vo.getFolder())) {
+				bf.setFolder(BookmarkFolder.DEFAULT);
+			} else {
+				bf.setFolder(vo.getFolder());
+			}
 			bf.setBookmarkId(vo.getId());
 			if( folderService.updateById(bf)) {
 				count++;
@@ -118,6 +128,44 @@ public class MBookmarkService {
 		}
 		
 		return ResMessage.newSuccessMessage("更新成功："+count+"个", null);
+	}
+	
+	/** 添加书签*/
+	@Transactional(rollbackFor = Exception.class)
+	public ResMessage addBookmark(BookmarkVo vo) {
+		Assert.notNull(vo, "没有数据");
+		Assert.hasText(vo.getFolder(), "缺少所属文件夹");
+		Assert.hasText(vo.getName(), "缺少书签名");
+		Assert.hasText(vo.getLink(), "缺少链接");
+		
+		// 存在文件夹id，向已有文件夹添加书签
+
+		// 先保存书签
+		Bookmark bm = new Bookmark();
+		BeanUtils.copyProperties(vo, bm);
+		bm.setId(null);
+		bm.setValid(ValidEnum.VALID.getCode());
+		LocalDateTime now = LocalDateTime.now();
+		bm.setCreateTime(now);
+		bm.setUpdateTime(now);
+		bookmarkService.save(bm);
+		
+		// 再保存文件夹
+		BookmarkFolder folder = new BookmarkFolder();
+		folder.setBookmarkId(bm.getId());
+		folder.setValid(ValidEnum.VALID.getCode());
+		folder.setCreateTime(now);
+		folder.setFolder(vo.getFolder());
+		folderService.save(folder);
+		
+		return ResMessage.newSuccessMessage("保存成功", null);
+	}
+	
+	/** 删除书签文件夹*/
+	public ResMessage deleteFolder() {
+		// TODO 删除文件夹
+		
+		return null;
 	}
 	
 }

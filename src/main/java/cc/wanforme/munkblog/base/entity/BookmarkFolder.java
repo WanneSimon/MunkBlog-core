@@ -19,7 +19,9 @@ import io.swagger.annotations.ApiModelProperty;
 public class BookmarkFolder implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    public static final String DEFAULT="mark";
+    
+    
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
