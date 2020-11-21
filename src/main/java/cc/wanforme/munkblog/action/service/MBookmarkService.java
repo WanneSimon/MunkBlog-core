@@ -36,12 +36,12 @@ public class MBookmarkService {
 	private IBookmarkService bookmarkService;
 	
 	/** 获取书签文件夹*/
-	public PageInfo<String> selectAllValidFolders(SearchVo searchVo){
-		return folderService.selectAllValidFolders(searchVo);
+	public ResMessage selectAllValidFolders(SearchVo searchVo){
+		return ResMessage.newSuccessMessage("查询成功", folderService.selectAllValidFolders(searchVo));
 	}
 	
 	/** 获取书签*/
-	public PageInfo<BookmarkVo> selectBookmars(BookmarkFolderSearchVo searchVo){
+	public ResMessage selectBookmars(BookmarkFolderSearchVo searchVo){
 		Assert.notNull(searchVo, "缺少参数");
 		Assert.hasText(searchVo.getFolder(), "没有书签文件夹");
 		
@@ -65,7 +65,7 @@ public class MBookmarkService {
 		PageInfo<BookmarkVo> re = new PageInfo<BookmarkVo>();
 		BeanUtils.copyProperties(bfsPageInfo, re, "list");
 		re.setList(bms);
-		return re;
+		return ResMessage.newSuccessMessage("获取成功", re);
 	}
 	
 	/** 更新书签*/
@@ -158,7 +158,10 @@ public class MBookmarkService {
 		folder.setFolder(vo.getFolder());
 		folderService.save(folder);
 		
-		return ResMessage.newSuccessMessage("保存成功", null);
+		BeanUtils.copyProperties(bm, vo);
+		vo.setFolderId(folder.getId());
+		vo.setFolder(folder.getFolder());
+		return ResMessage.newSuccessMessage("保存成功", vo);
 	}
 	
 	/** 删除书签文件夹*/

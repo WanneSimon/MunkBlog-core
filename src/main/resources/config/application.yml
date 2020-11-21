@@ -7,7 +7,7 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: coco
   application:
     name: CooRush
   # jackson 序列化对象时，去除 null 属性

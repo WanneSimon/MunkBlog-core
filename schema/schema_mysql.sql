@@ -75,7 +75,7 @@ CREATE TABLE `book`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bookmark`;
 CREATE TABLE `bookmark`  (
-  `id` int(0) NOT NULL,
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '书签名',
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '简短描述',
   `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '书签连接',
