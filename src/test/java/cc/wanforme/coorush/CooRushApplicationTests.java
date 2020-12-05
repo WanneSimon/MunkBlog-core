@@ -3,10 +3,10 @@ package cc.wanforme.coorush;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class CooRushApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 
