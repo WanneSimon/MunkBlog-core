@@ -158,7 +158,7 @@ public class MBlogService {
 //		Assert.notNull(blogVo.getEditor(), "没有编辑器");
 //		Assert.notNull(blogVo.getValid(), "没有生效标志");
 		
-//		blogVo.setContent(null);
+		blogVo.setCreateTime(null);
 		blogVo.setUpdateTime(null);
 		
 		Blog po = blogService.getById(blogVo.getId());
