@@ -9,7 +9,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cc.wanforme.munkblog.authen.dto.UserRoleAuth;
 import cc.wanforme.munkblog.authen.service.MTokenService;
@@ -22,6 +25,7 @@ import cc.wanforme.munkblog.base.entity.AuthToken;
  */
 
 public class MRememberMeFilter implements Filter{
+	private static final Logger log = LoggerFactory.getLogger(MRememberMeFilter.class);
 	
 	private String cookieName;
 	private MTokenService tokenService;
@@ -44,16 +48,21 @@ public class MRememberMeFilter implements Filter{
 			token = cookie.getValue();
 		}
 		
-		// 存在 token，并且未添加验证信息（注意：登录的时候，一定要先清除验证信息）
-		if( token != null && !userRoleAuthService.isAuthenticattionAdded()) {
-			UserRoleAuth roleAuth = userRoleAuthService.selectAuthenticationsByToken(token);
-			String host = req.getRemoteHost();
-			
-			// 检查 token 登陆地
-			AuthToken tokenInfo = tokenService.selectToken(token);
-			if( tokenInfo.getHost().equals(host) ) {
-				userRoleAuthService.setAuthentications(roleAuth);
+		try {
+			// 存在 token，并且未添加验证信息（注意：登录的时候，一定要先清除验证信息）
+			if( token != null && !userRoleAuthService.isAuthenticattionAdded()) {
+				UserRoleAuth roleAuth = userRoleAuthService.selectAuthenticationsByToken(token);
+				String host = req.getRemoteHost();
+				
+				// 检查 token 登陆地
+				AuthToken tokenInfo = tokenService.selectToken(token);
+				if( tokenInfo.getHost().equals(host) ) {
+					userRoleAuthService.setAuthentications(roleAuth);
+				}
 			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			userRoleAuthService.clearLoginAuthentications((HttpServletResponse)response);
 		}
 		
 		chain.doFilter(request, response);
